@@ -20,14 +20,19 @@ export class AuthenticationService {
         return this.currentUserSubject.value;
     }
 
-    login(email: string, password: string) {
-        //return this.http.post<any>(`${environment.apiUrl}/users/authenticate`, { username, password })
+    login(email: string, password: string) {        
         return this.http.post<any>(`${environment.apiUrl}/login`, { email, password })
             .pipe(map(user => {
-                // store user details and jwt token in local storage to keep user logged in between page refreshes
-                // console.log(JSON.stringify(user))
+                // store user details and jwt token in local storage to keep user logged in between page refreshes                
                 localStorage.setItem('currentUser', JSON.stringify(user));
                 this.currentUserSubject.next(user);
+                return user;
+            }));
+    }
+
+    register(firstname: string, lastname: string, email: string, password: string, password_conf: string) {        
+        return this.http.post<any>(`${environment.apiUrl}/register`, { firstname, lastname, email, password, password_conf })
+            .pipe(map(user => {
                 return user;
             }));
     }
