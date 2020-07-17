@@ -14,7 +14,8 @@ import { HomeComponent } from './home';
 import { LoginComponent } from './login';
 import { ProfileComponent } from './profile';
 import { RegisterComponent } from './register';
-import { PrivateComponent } from './private';
+import { PrivateComponent } from './private';;
+import { ServiceComponent } from './service'
 @NgModule({
     imports: [
         BrowserModule,
@@ -28,7 +29,8 @@ import { PrivateComponent } from './private';
         LoginComponent,
         ProfileComponent ,
         RegisterComponent ,
-        PrivateComponent  ],
+        PrivateComponent ,
+        ServiceComponent ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
