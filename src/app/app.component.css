@@ -1,0 +1,103 @@
+.footer_title {
+	font-family: 'Source Sans Pro', Arial, Helvetica, sans-serif !important;
+    text-align: left;
+    line-height: 1.5rem;
+    letter-spacing: 0rem;
+    font-weight: 700;
+    font-size: 0.875rem;
+    border-style: none;
+    margin: 0rem;
+    border-radius: 0rem;
+    padding: 0rem;
+    color: #4d69b0;
+    text-decoration: none;
+	font-weight: bold;
+}
+
+.footer_text {
+	font-family:Lato,Arial,Helvetica,sans-serif;
+    text-align: left;
+    line-height: 1.5rem;
+    letter-spacing: 0rem;
+    font-weight: 400;
+    font-size: 0.875rem;
+    border-style: none;
+    margin: 0rem;
+    border-radius: 0rem;
+    padding: 0rem;
+    color: #5D5F64;
+    text-decoration: none;
+}
+
+.footer_flag {
+	width:100px;
+	height:67px;
+}
+
+.footer_innercontainer {
+	margin: 1rem 0.5rem 1rem 0.5rem;
+}
+
+.footer_link {
+	font-family:Lato,Arial,Helvetica,sans-serif !important;
+    text-align: left;
+    line-height: 1.5rem;
+    letter-spacing: 0rem;
+    font-weight: 400;
+    font-size: 1rem;
+    border-style: none;
+    margin: 0rem;
+    border-radius: 0rem;
+    padding: 0rem;
+    color: #202020;
+    text-decoration: none !important;
+}
+
+.footer_link:hover {
+	color: #4d69b0;
+}
+
+.bottom_area {
+	height: 5rem;
+	width: 100%;
+	color: #1A5FA2;
+	margin: 0rem 0rem 0rem 0rem;
+	background-color: #4d69b0;
+}
+
+.bottom_link {
+	font-family:Lato,Arial,Helvetica,sans-serif;
+    text-align: left;
+    line-height: 1.3rem;
+    letter-spacing: 0rem;
+    font-weight: 400;
+    font-size: 0.813rem;
+    border-style: none;
+    margin: 0rem;
+    border-radius: 0rem;
+    padding: 0rem;
+    color: white;
+    text-decoration: none !important;
+}
+
+.bottom_link:hover {
+	color: #4d69b0;
+}
+
+.bottom_text {
+	font-family:Lato,Arial,Helvetica,sans-serif;
+    text-align: left;
+    line-height: 1.3rem;
+    letter-spacing: 0rem;
+    font-weight: 400;
+    font-size: 0.813rem;
+    border-style: none;
+    margin: 0rem;
+    border-radius: 0rem;
+    padding: 0rem;
+    color: white;
+    text-decoration: none !important;
+}
+
+
+

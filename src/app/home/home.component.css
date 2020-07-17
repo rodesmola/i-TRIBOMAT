@@ -1,0 +1,9 @@
+.hero_area {
+	background-image: url(https://www.i-tribomat.eu/img/hero.png);
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 340px;
+    padding: 0;
+    width: 100%;
+}

@@ -1,0 +1,84 @@
+﻿<!-- <nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser">
+    <div class="navbar-nav">
+        <a class="nav-item nav-link" routerLink="/">Home</a>
+        <a class="nav-item nav-link" routerLink="/profile">Profile</a>
+        <a class="nav-item nav-link" (click)="logout()">Logout</a>
+    </div>
+</nav> -->
+
+ <nav class="navbar navbar-expand-sm bg-light" *ngIf="currentUser"> 
+    <a class="navbar-brand" routerLink="/">
+        <img src="./assets/itribomatlogo.svg" width="130" height="30" alt="" loading="lazy">
+      </a>
+    <ul class="navbar-nav ml-auto"> 
+        <li class="nav-item"> 
+            <a class="nav-item nav-link" routerLink="/">Home</a>
+        </li> 
+        <li class="nav-item"> 
+            <a class="nav-item nav-link" routerLink="/profile">Profile</a>
+        </li> 
+        <li class="nav-item"> 
+            <a class="nav-item nav-link" (click)="logout()">Logout</a> 
+        </li> 
+    </ul> 
+</nav> 
+
+<!-- main app container -->
+<div class="container">    
+    <router-outlet></router-outlet>
+</div>
+
+<footer style="background-color: #e6e6e6;" *ngIf="currentUser">
+    <div class="container">
+      <div class="row ">
+        <div class="col-sx-12 col-sm-12 col-md-12 col-lg-3 col-xl-3">
+          <div class="footer_innercontainer">
+            <h4 class="footer_title">i-TRIBOMAT</h4><br>
+            <p class="footer_text"> Intelligent Open Test Bed for Materials</p>
+            <p class="footer_text"> Tribological Characterisation Services</p>
+          </div>
+        </div>
+
+        <div class="col-sx-12 col-sm-12 col-md-12 col-lg-3 col-xl-3">
+          <div class="footer_innercontainer">
+            <h4 class="footer_title">COMPANY</h4><br>
+            <a class="footer_link" href="https://www.i-tribomat.eu/index.html">Home</a><br>
+            <a class="footer_link" href="https://www.i-tribomat.eu/partner.html">Project Partners</a><br>
+            <a class="footer_link" href="https://www.i-tribomat.eu/project.html">The Project</a><br>
+            <a class="footer_link" href="https://www.i-tribomat.eu/news-overview.html">News</a><br>
+            <a class="footer_link" href="https://www.i-tribomat.eu/jobs.html">Jobs</a>
+          </div>
+        </div>
+    
+
+        <div class="col-sx-12 col-sm-12 col-md-12 col-lg-3 col-xl-3">
+            <div class="footer_innercontainer">
+              <h4 class="footer_title">ABOUT</h4><br>
+              <a class="footer_link" href="https://www.i-tribomat.eu/corporate-information.html">Corporate Information</a><br>
+              <a class="footer_link" href="https://www.i-tribomat.eu/privacy.html">Privacy Notice</a><br>
+              <a class="footer_link" href="https://www.i-tribomat.eu/cookies.html">Cookie Policy</a><br>
+              <a class="footer_link" href="https://www.i-tribomat.eu/termsofuse.html">Terms of use</a><br>              
+            </div>
+        </div>
+
+        <div class="col-sx-12 col-sm-12 col-md-12 col-lg-3 col-xl-3">
+            <div class="footer_innercontainer">
+              <h4 class="footer_title">CONTACT US</h4><br>
+              <p class="footer_text"> AC2T research GmbH</p>
+              <p class="footer_text"> Viktor-Kaplan-Str. 2/C</p>            
+              <p class="footer_text"> 2700 Wiener Neustadt, Austria</p>            
+            </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container-fluid bottom_area d-flex justify-content-center align-items-center">
+        <div class="row ">
+            <span class="bottom_text"> © 2019 AC2T research GmbH | </span>
+            <img src="https://www.i-tribomat.eu/img/eu.png" height="15" style="margin-right: 5px; margin-left: 5px;"/>
+            <span class="bottom_text">This project has received funding from the European Union’s Horizon 2020 research and innovation programme under grant agreement No. 814494</span>
+        </div>
+    </div>
+
+  </footer>
