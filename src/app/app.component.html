@@ -6,7 +6,7 @@
     </div>
 </nav> -->
 
- <nav class="navbar navbar-expand-sm bg-light" *ngIf="currentUser"> 
+ <nav class="navbar navbar-expand-sm bg-light"> 
     <a class="navbar-brand" routerLink="/">
         <img src="./assets/itribomatlogo.svg" width="130" height="30" alt="" loading="lazy">
       </a>
@@ -14,10 +14,16 @@
         <li class="nav-item"> 
             <a class="nav-item nav-link" routerLink="/">Home</a>
         </li> 
-        <li class="nav-item"> 
-            <a class="nav-item nav-link" routerLink="/profile">Profile</a>
+        <li class="nav-item" *ngIf="!currentUser"> 
+            <a class="nav-item nav-link" routerLink="/login">Login</a>
         </li> 
-        <li class="nav-item"> 
+        <li class="nav-item" *ngIf="currentUser"> 
+          <a class="nav-item nav-link" routerLink="/private">Private</a>
+        </li> 
+        <li class="nav-item" *ngIf="currentUser"> 
+          <a class="nav-item nav-link" routerLink="/profile">Profile</a>
+        </li> 
+        <li class="nav-item" *ngIf="currentUser"> 
             <a class="nav-item nav-link" (click)="logout()">Logout</a> 
         </li> 
     </ul> 
@@ -28,7 +34,7 @@
     <router-outlet></router-outlet>
 </div>
 
-<footer style="background-color: #e6e6e6;" *ngIf="currentUser">
+<footer style="background-color: #e6e6e6;" >
     <div class="container">
       <div class="row ">
         <div class="col-sx-12 col-sm-12 col-md-12 col-lg-3 col-xl-3">

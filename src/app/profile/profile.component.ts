@@ -58,7 +58,7 @@ export class ProfileComponent {
         }
 
         this.loading = true;
-        this.router.navigate(['/']);
+        this.router.navigate(['/private']);
         console.log(this.f)
     }
 }
