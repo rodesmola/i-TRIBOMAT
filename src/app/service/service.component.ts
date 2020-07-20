@@ -37,15 +37,15 @@ export class ServiceComponent implements OnInit {
     this.isGearOtherSelected = false;
     this.isLubricantOtherSelected = false;
     this.checklist = [
-      {id:0,text:'Gears', value:'gears',isSelected:true},
-      {id:1,text:'Ball bearing', value:'ballbearing',isSelected:false},
-      {id:2,text:'Roller bearing', value:'rollerbearing',isSelected:false},
-      {id:3,text:'Plain bearing', value:'plainbearing',isSelected:false},
-      {id:4,text:'Piston-Cylinder liner', value:'pistoncylinderliner',isSelected:false},
-      {id:5,text:'Camshaft/Followers', value:'camshaftfollowers',isSelected:false},
-      {id:6,text:'Seals', value:'seals',isSelected:false},
-      {id:7,text:'Surface/Floor', value:'surfacefloor',isSelected:false},
-      {id:8,text:'Other', value:'mcother',isSelected:false}
+      {id:0,text:'Gears', value:'gears', img: './assets/gear.png',isSelected:true},
+      {id:1,text:'Ball bearing', value:'ballbearing', img: './assets/ball_bearing.png',isSelected:false},
+      {id:2,text:'Roller bearing', value:'rollerbearing', img: './assets/roller_bearing.png',isSelected:false},
+      {id:3,text:'Plain bearing', value:'plainbearing', img: './assets/plain_bearing.png',isSelected:false},
+      {id:4,text:'Piston-Cylinder liner', value:'pistoncylinderliner', img: './assets/piston.png',isSelected:false},
+      {id:5,text:'Camshaft/Followers', value:'camshaftfollowers', img: './assets/camshaft.png',isSelected:false},
+      {id:6,text:'Seals', value:'seals', img: './assets/seals.png',isSelected:false},
+      {id:7,text:'Surface/Floor', value:'surfacefloor', img: 'surface',isSelected:false},
+      {id:8,text:'Other', value:'mcother', img: 'mcother',isSelected:false}
     ]  
     this.gearschecklist = [
       {id:0,text:'Twin disc', value:'twindisc',isSelected:true},
