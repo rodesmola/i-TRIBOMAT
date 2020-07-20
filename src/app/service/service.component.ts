@@ -21,8 +21,10 @@ export class ServiceComponent implements OnInit {
 
   checklist:any;
   gearschecklist: any;
+  lubricantchecklist: any;
   isMcOtherSelected: boolean;
   isGearOtherSelected: boolean;
+  isLubricantOtherSelected: boolean;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -33,6 +35,7 @@ export class ServiceComponent implements OnInit {
   ) {     
     this.isMcOtherSelected = false;
     this.isGearOtherSelected = false;
+    this.isLubricantOtherSelected = false;
     this.checklist = [
       {id:0,text:'Gears', value:'gears',isSelected:true},
       {id:1,text:'Ball bearing', value:'ballbearing',isSelected:false},
@@ -43,14 +46,21 @@ export class ServiceComponent implements OnInit {
       {id:6,text:'Seals', value:'seals',isSelected:false},
       {id:7,text:'Surface/Floor', value:'surfacefloor',isSelected:false},
       {id:8,text:'Other', value:'mcother',isSelected:false}
-
     ]  
     this.gearschecklist = [
       {id:0,text:'Twin disc', value:'twindisc',isSelected:true},
       {id:1,text:'Spur gears (FZG)', value:'spurgears',isSelected:false},
       {id:2,text:'Helical gears', value:'helicalgears',isSelected:false},
       {id:3,text:'Other', value:'gearsother',isSelected:false}
-    ]  
+    ] 
+    this.lubricantchecklist = [
+      {id:0,text:'Mineral oil', value:'mineraloil',isSelected:true},
+      {id:1,text:'Synthetic oil', value:'syntheticoil',isSelected:false},
+      {id:2,text:'Bio lubricant', value:'biolubricant',isSelected:false},
+      {id:3,text:'Solid lubricant', value:'solidlubricant',isSelected:false},
+      {id:4,text:'Greases', value:'greases',isSelected:false},
+      {id:5,text:'Other', value:'lubricantother',isSelected:false}
+    ]   
   }
 
   ngOnInit(): void {
@@ -65,12 +75,20 @@ export class ServiceComponent implements OnInit {
       seals: ['false'],
       surfacefloor: ['false'],
       mcother: ['false'],  
+      mcotherinput: [''], 
       twindisc: ['true'],       
       spurgears: ['false'],  
       helicalgears: ['false'],  
-      gearsother: ['false'],  
-      mcotherinput: [''], 
+      gearsother: ['false'],        
       gearotherinput: [''], 
+      mineraloil: ['true'], 
+      syntheticoil: ['false'], 
+      biolubricant: ['false'],
+      solidlubricant: ['false'],
+      greases: ['false'],
+      lubricantother: ['false'],
+      lubricantotherinput: [''], 
+
     });
     // this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/private';
   }
@@ -81,20 +99,29 @@ export class ServiceComponent implements OnInit {
 
     if(list === 'gears'){
       currentlist = this.gearschecklist;
+    
+    }else if (list === 'lubricant'){
+      currentlist = this.lubricantchecklist
     }else{
       currentlist = this.checklist
     }
-  
+
     for (var i = 0; i < currentlist.length; i++) {
       if(currentlist[i].id != e){
         currentlist[i].isSelected = false        
       }
-
+              
       if(list === 'mc'){
         if (e === 8){
           this.isMcOtherSelected = true;
         }else{
           this.isMcOtherSelected = false;
+        }
+      }else if(list === 'lubricant'){
+        if (e === 5){
+          this.isLubricantOtherSelected = true;
+        }else{
+          this.isLubricantOtherSelected = false;
         }
       }else{
         if (e === 3){
