@@ -21,7 +21,8 @@ export class ServiceComponent implements OnInit {
 
   checklist:any;
   gearschecklist: any;
-
+  isMcOtherSelected: boolean;
+  isGearOtherSelected: boolean;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -30,6 +31,8 @@ export class ServiceComponent implements OnInit {
     // private route: ActivatedRoute,
     // private authenticationService: AuthenticationService
   ) {     
+    this.isMcOtherSelected = false;
+    this.isGearOtherSelected = false;
     this.checklist = [
       {id:0,text:'Gears', value:'gears',isSelected:true},
       {id:1,text:'Ball bearing', value:'ballbearing',isSelected:false},
@@ -66,6 +69,8 @@ export class ServiceComponent implements OnInit {
       spurgears: ['false'],  
       helicalgears: ['false'],  
       gearsother: ['false'],  
+      mcotherinput: [''], 
+      gearotherinput: [''], 
     });
     // this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/private';
   }
@@ -84,6 +89,21 @@ export class ServiceComponent implements OnInit {
       if(currentlist[i].id != e){
         currentlist[i].isSelected = false        
       }
+
+      if(list === 'mc'){
+        if (e === 8){
+          this.isMcOtherSelected = true;
+        }else{
+          this.isMcOtherSelected = false;
+        }
+      }else{
+        if (e === 3){
+          this.isGearOtherSelected = true;
+        }else{
+          this.isGearOtherSelected = false;
+        }
+      }
+
     }
   }
 
