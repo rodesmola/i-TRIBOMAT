@@ -20,9 +20,7 @@
                     <div *ngFor="let item of checklist" class="form-check form-group col-md-6" >
                         <input type="checkbox" [formControlName]="item.value" [(ngModel)]="item.isSelected" name="list_name" value="{{item.id}}" (change)="isAllSelected(item.id, 'mc')"/>
                         {{item.text}}
-                        <img class="pa-1" src="{{item.img}}" 
-                            width="50" height="50" alt="" loading="lazy">
-                             
+                        <img style="padding-left: 5px;" src="{{item.img}}" width="50" height="50" alt="" loading="lazy">                             
                         <div class="form-check form-group col-md-12">
                             <input type="string" *ngIf="isMcOtherSelected && item.value === 'mcother'" formControlName="mcotherinput" class="form-control" />
                         </div>                   
