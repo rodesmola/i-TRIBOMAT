@@ -4,6 +4,10 @@
         <div class="card-body">
             <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
                 <div class="row">
+
+                    <span class="col-md-12"><strong style="color:#4d69b0;">Contact information</strong> </span> 
+                    <div class="dropdown-divider col-md-12" style="margin-bottom: 15px;"></div>
+
                     <div class="form-group col-md-8">
                         <label for="legal_name">Legal name</label>
                         <input type="text" formControlName="legal_name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.legal_name.errors }" />
@@ -21,22 +25,6 @@
                     </div>
 
                     <div class="form-group col-md-4">
-                        <label for="ilegal_status">Legal status</label>
-                        <input type="text" formControlName="legal_status" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.legal_status.errors }" />
-                        <div *ngIf="submitted && f.legal_status.errors" class="invalid-feedback">
-                            <div *ngIf="f.legal_status.errors.required">Legal status is required</div>
-                        </div>
-                    </div>
-
-                    <div class="form-group col-md-4">
-                        <label for="industrial_sector">Industrial sector</label>
-                        <input type="text" formControlName="industrial_sector" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.industrial_sector.errors }" />
-                        <div *ngIf="submitted && f.industrial_sector.errors" class="invalid-feedback">
-                            <div *ngIf="f.industrial_sector.errors.required">Industrial sector is required</div>
-                        </div>
-                    </div>
-
-                    <div class="form-group col-md-4">
                         <label for="department">Department</label>
                         <input type="text" formControlName="department" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.department.errors }" />
                         <div *ngIf="submitted && f.department.errors" class="invalid-feedback">
@@ -44,7 +32,17 @@
                         </div>
                     </div>
 
-                    <div class="dropdown-divider col-md-12"></div>
+                    <div class="form-group col-md-8">
+                        <label for="webpage">Web</label>
+                        <input type="text" formControlName="webpage" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.webpage.errors }" />
+                        <div *ngIf="submitted && f.webpage.errors" class="invalid-feedback">
+                            <div *ngIf="f.webpage.errors.required">Web code is required</div>
+                        </div>
+                    </div>
+
+                    <span class="col-md-12"><strong style="color:#4d69b0;">Contact address of the organization</strong> </span> 
+                    <div class="dropdown-divider col-md-12" style="margin-bottom: 15px;"></div>
+                    
                     <div class="form-group col-md-4">
                         <label for="country">Country</label>
                         <input type="text" formControlName="country" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.country.errors }" />
@@ -84,21 +82,23 @@
                             <div *ngIf="f.location.errors.required">Location code is required</div>
                         </div>
                     </div>                  
-                    <span class="col-md-12"><strong>Contact information</strong> </span>  
-                    <div class="dropdown-divider col-md-12"></div>
-                    <div class="form-group col-md-8">
-                        <label for="webpage">Web</label>
-                        <input type="text" formControlName="webpage" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.webpage.errors }" />
-                        <div *ngIf="submitted && f.webpage.errors" class="invalid-feedback">
-                            <div *ngIf="f.webpage.errors.required">Web code is required</div>
+                    
+                    <span class="col-md-12"><strong style="color:#4d69b0;">Contact person</strong> </span> 
+                    <div class="dropdown-divider col-md-12" style="margin-bottom: 15px;"></div>
+
+                    <div class="form-group col-md-4">
+                        <label for="first_name">First name</label>
+                        <input type="text" formControlName="first_name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.first_name.errors }" />
+                        <div *ngIf="submitted && f.first_name.errors" class="invalid-feedback">
+                            <div *ngIf="f.first_name.errors.required">First name code is required</div>
                         </div>
                     </div>
 
                     <div class="form-group col-md-4">
-                        <label for="email">Email</label>
-                        <input type="email" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
-                        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                            <div *ngIf="f.email.errors.required">Email code is required</div>
+                        <label for="last_name">Last name</label>
+                        <input type="text" formControlName="last_name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.last_name.errors }" />
+                        <div *ngIf="submitted && f.last_name.errors" class="invalid-feedback">
+                            <div *ngIf="f.last_name.errors.required">Last name code is required</div>
                         </div>
                     </div>
 
@@ -110,6 +110,14 @@
                         </div>
                     </div>
 
+                    <div class="form-group col-md-6">
+                        <label for="email">Email</label>
+                        <input type="email" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                            <div *ngIf="f.email.errors.required">Email code is required</div>
+                        </div>
+                    </div>
+
                     <div class="form-group col-md-4">
                         <label for="fax">Fax</label>
                         <input type="text" formControlName="fax" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.fax.errors }" />
@@ -118,7 +126,20 @@
                         </div>
                     </div>
 
-                    <div class="dropdown-divider col-md-12"></div>
+                    <span class="col-md-12"><strong style="color:#4d69b0;">Industrial sector</strong> </span> 
+                    <div class="dropdown-divider col-md-12" style="margin-bottom: 15px;"></div>
+
+                    <div *ngFor="let item of sectorChecklist" class="form-check form-group col-md-4" >
+                        <input type="checkbox" [formControlName]="item.value" [(ngModel)]="item.isSelected" name="list_name" value="{{item.id}}" (change)="isAllSelected(item.id, 'sector')"/>
+                        {{item.text}}                        
+                        <div class="form-check form-group col-md-12">
+                            <input type="string" *ngIf="isSectorOtherSelected && item.value === 'sectorother'" formControlName="sectorotherinput" class="form-control"/>
+                        </div>                   
+                    </div>
+
+                    <span class="col-md-12"><strong style="color:#4d69b0;">Invoicing address</strong> </span> 
+                    <div class="dropdown-divider col-md-12" style="margin-bottom: 15px;"></div>
+                    
                     <div class="form-group col-md-8">
                         <label for="invoice_street">Invoice street</label>
                         <input type="text" formControlName="invoice_street" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.invoice_street.errors }" />
@@ -152,18 +173,18 @@
                     </div>
 
                     <div class="form-group col-md-4">
-                        <label for="invoice_web">Invoice web</label>
-                        <input type="text" formControlName="invoice_web" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.invoice_web.errors }" />
-                        <div *ngIf="submitted && f.invoice_web.errors" class="invalid-feedback">
-                            <div *ngIf="f.invoice_web.errors.required">Invoice web code is required</div>
-                        </div>
-                    </div>
-
-                    <div class="form-group col-md-4">
                         <label for="vatNumber">VAT number</label>
                         <input type="text" formControlName="vatNumber" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.vatNumber.errors }" />
                         <div *ngIf="submitted && f.vatNumber.errors" class="invalid-feedback">
                             <div *ngIf="f.vatNumber.errors.required">VAT number is required</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="invoice_web">Invoice web</label>
+                        <input type="text" formControlName="invoice_web" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.invoice_web.errors }" />
+                        <div *ngIf="submitted && f.invoice_web.errors" class="invalid-feedback">
+                            <div *ngIf="f.invoice_web.errors.required">Invoice web code is required</div>
                         </div>
                     </div>
 
@@ -175,14 +196,28 @@
                         </div>
                     </div>
 
-                    <div class="dropdown-divider col-md-12"></div>
-                    <div class="form-group col-md-12">
-                        <label for="how_meet_us">How meet us</label>
-                        <textarea formControlName="how_meet_us" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.how_meet_us.errors }" > </textarea>
-                        <div *ngIf="submitted && f.how_meet_us.errors" class="invalid-feedback">
-                            <div *ngIf="f.how_meet_us.errors.required">Field required</div>
-                        </div>
+                    <span class="col-md-12"><strong style="color:#4d69b0;">Legal status of the organization</strong> </span> 
+                    <div class="dropdown-divider col-md-12" style="margin-bottom: 15px;"></div>
+
+                    <div *ngFor="let item of statusChecklist" class="form-check form-group col-md-4" >
+                        <input type="checkbox" [formControlName]="item.value" [(ngModel)]="item.isSelected" name="list_name" value="{{item.id}}" (change)="isAllSelected(item.id, 'status')"/>
+                        {{item.text}}                        
+                        <div class="form-check form-group col-md-12">
+                            <input type="string" *ngIf="isStatusOtherSelected && item.value === 'statusother'" formControlName="statusotherinput" class="form-control"/>
+                        </div>                   
                     </div>
+
+                    <span class="col-md-12"><strong style="color:#4d69b0;">How did you meet us?</strong> </span> 
+                    <div class="dropdown-divider col-md-12" style="margin-bottom: 15px;"></div>
+
+                    <div *ngFor="let item of meetChecklist" class="form-check form-group col-md-4" >
+                        <input type="checkbox" [formControlName]="item.value" [(ngModel)]="item.isSelected" name="list_name" value="{{item.id}}" (change)="isAllSelected(item.id, 'meet')"/>
+                        {{item.text}}                        
+                        <div class="form-check form-group col-md-12">
+                            <input type="string" *ngIf="isMeetOtherSelected && item.value === 'meetother'" formControlName="meetotherinput" class="form-control" />
+                        </div>                   
+                    </div>
+
                     <div class="dropdown-divider col-md-12"></div>
                 </div>
 
