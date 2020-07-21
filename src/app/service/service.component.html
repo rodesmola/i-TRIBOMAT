@@ -40,10 +40,10 @@
                     <span class="col-md-12"><strong style="color:#4d69b0;">Gears</strong> </span>
                     <div class="dropdown-divider col-md-12"></div>
 
-
                     <div *ngFor="let item of gearschecklist" class="form-check form-group col-md-6" >
                         <input  type="checkbox" [formControlName]="item.value" [(ngModel)]="item.isSelected" name="list_name" value="{{item.id}}" (change)="isAllSelected(item.id, 'gears')"/>
                         {{item.text}}
+                        <img style="padding-left: 5px;" src="{{item.img}}" width="50" height="50" alt="" loading="lazy">                             
                         <div class="form-check form-group col-md-12">
                             <input type="string" *ngIf="isGearOtherSelected  && item.value === 'gearsother'" formControlName="gearotherinput" class="form-control" />
                         </div>

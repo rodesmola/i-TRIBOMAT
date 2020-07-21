@@ -46,13 +46,7 @@ export class ServiceComponent implements OnInit {
       {id:6,text:'Seals', value:'seals', img: './assets/seals.png',isSelected:false},
       {id:7,text:'Surface/Floor', value:'surfacefloor', img: 'surface',isSelected:false},
       {id:8,text:'Other', value:'mcother', img: 'mcother',isSelected:false}
-    ]  
-    this.gearschecklist = [
-      {id:0,text:'Twin disc', value:'twindisc',isSelected:true},
-      {id:1,text:'Spur gears (FZG)', value:'spurgears',isSelected:false},
-      {id:2,text:'Helical gears', value:'helicalgears',isSelected:false},
-      {id:3,text:'Other', value:'gearsother',isSelected:false}
-    ] 
+    ]
     this.lubricantchecklist = [
       {id:0,text:'Mineral oil', value:'mineraloil',isSelected:true},
       {id:1,text:'Synthetic oil', value:'syntheticoil',isSelected:false},
@@ -60,7 +54,13 @@ export class ServiceComponent implements OnInit {
       {id:3,text:'Solid lubricant', value:'solidlubricant',isSelected:false},
       {id:4,text:'Greases', value:'greases',isSelected:false},
       {id:5,text:'Other', value:'lubricantother',isSelected:false}
-    ]   
+    ]     
+    this.gearschecklist = [
+      {id:0,text:'Twin disc', value:'twindisc', img: './assets/twin_disc.png',isSelected:true},
+      {id:1,text:'Spur gears (FZG)', value:'spurgears', img: './assets/spur_gear.png',isSelected:false},
+      {id:2,text:'Helical gears', value:'helicalgears', img: './assets/helical_gear.png',isSelected:false},
+      {id:3,text:'Other', value:'gearsother', img: 'gearsother',isSelected:false}
+    ] 
   }
 
   ngOnInit(): void {
