@@ -4,20 +4,30 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { environment } from '@environments/environment';
-import { User } from '@app/_models';
+import { User, UserProfile } from '@app/_models';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
+
+    private currentUserProfileSubject: BehaviorSubject<UserProfile>;
+    public currentUserProfile: Observable<UserProfile>;
    
     constructor(private http: HttpClient) {
         this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
         this.currentUser = this.currentUserSubject.asObservable();
+        
+        this.currentUserProfileSubject = new BehaviorSubject<UserProfile>(JSON.parse(localStorage.getItem('currentUserProfile')));
+        this.currentUserProfile = this.currentUserProfileSubject.asObservable();
     }
 
     public get currentUserValue(): User {
         return this.currentUserSubject.value;
+    }
+
+    public get currentUserProfileValue(): UserProfile {
+        return this.currentUserProfileSubject.value;
     }
 
     login(email: string, password: string) {        

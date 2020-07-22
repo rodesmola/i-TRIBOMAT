@@ -1,10 +1,8 @@
 import { Component, OnInit, NgModule  } from '@angular/core';
 
-
-
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
-import { AuthenticationService } from '@app/_services';
+// import { Router, ActivatedRoute } from '@angular/router';
+// import { AuthenticationService } from '@app/_services';
 
 
 @Component({

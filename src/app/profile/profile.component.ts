@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { first } from 'rxjs/operators';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
 import { Router} from '@angular/router';
-
+import { UserProfile } from '@app/_models';
+import { BehaviorSubject, Observable } from 'rxjs';
+//import { first } from 'rxjs/operators';
 //import { UserService, AuthenticationService } from '@app/_services';
 
 @Component({ templateUrl: './profile.component.html' })
@@ -19,13 +19,25 @@ export class ProfileComponent {
     isSectorOtherSelected: boolean;
     statusChecklist:any;
     isStatusOtherSelected: boolean;
+    selectedChecboxes: [];
+    userLegalStatus: string;
+    userMeet: string;
+    userSector: string;
+  
+    private currentUserProfileSubject: BehaviorSubject<UserProfile>;
+    public currentUserProfile: Observable<UserProfile>;
 
     constructor(
         // private userService: UserService,
+        //private router: Router,
+        
         private formBuilder: FormBuilder,
-        private router: Router,
+        
     ) { 
-
+  
+        this.currentUserProfileSubject = new BehaviorSubject<UserProfile>(JSON.parse(localStorage.getItem('currentUserProfile')));
+        this.currentUserProfile = this.currentUserProfileSubject.asObservable();
+        
         this.isSectorOtherSelected = false;
         this.sectorChecklist = [
             {id:0,text:'Transport', value:'transport', isSelected:true},
@@ -58,6 +70,7 @@ export class ProfileComponent {
     }
 
     ngOnInit() {
+        
         this.profileForm = this.formBuilder.group({
             legal_name: ['1', Validators.required],
             short_name: ['1', Validators.required],
@@ -128,24 +141,30 @@ export class ProfileComponent {
             if(list === 'meet'){
                 if (e === 4){
                     this.isMeetOtherSelected = true;
+                    this.userMeet = "other"
                 }else{
                     this.isMeetOtherSelected = false;
+                    this.userMeet = currentlist[e].value
                 }
             }else if(list === 'sector'){
                 if (e === 8){
                     this.isSectorOtherSelected = true;
+                    this.userSector = "other"
                 }else{
                     this.isSectorOtherSelected = false;
+                    this.userSector = currentlist[e].value
                 }
             }else{
                 if (e === 5){
                     this.isStatusOtherSelected = true;
+                    this.userLegalStatus = "other"
                 }else{
                     this.isStatusOtherSelected = false;
+                    this.userLegalStatus = currentlist[e].value
                 }
-            }
-    
+            }              
         }
+
       }
 
     onSubmit() {
@@ -154,10 +173,65 @@ export class ProfileComponent {
         // stop here if form is invalid
         if (this.profileForm.invalid) {
             return;
+        }  
+
+        if(this.userLegalStatus === 'other'){
+            this.userLegalStatus = this.f.statusotherinput.value
+        }
+        if(this.userMeet === 'other'){
+            this.userMeet = this.f.meetotherinput.value
+        }
+        if(this.userSector === 'other'){
+            this.userSector = this.f.sectorotherinput.value
         }
 
-        this.loading = true;
-        this.router.navigate(['/private']);
-        console.log(this.f)
+        var user = {           
+            "legal_name": this.f.legal_name.value,
+            "short_name": this.f.short_name.value,
+            "department": this.f.department.value,
+            "street": this.f.street.value,
+            "town": this.f.town.value,
+            "postcode": this.f.postcode.value,
+            "country": this.f.country.value,
+            "webpage": this.f.webpage.value,
+            "location": this.f.location.value,
+            "invoice_street": this.f.invoice_street.value,
+            "invoice_town": this.f.invoice_town.value,
+            "invoice_postcode": this.f.invoice_postcode.value,
+            "invoice_country": this.f.invoice_country.value,
+            "invoice_web": this.f.invoice_web.value,
+            "vatNumber": this.f.vatNumber.value,
+            "invoice_terms": this.f.invoice_terms.value,
+
+            "legal_status": this.userLegalStatus,
+            "industrial_sector": this.userSector,
+            "how_meet_us": this.userMeet,
+
+            "contactPersons": [
+                {
+                    "firstName": this.f.first_name.value,
+                    "lastName": this.f.last_name.value,                    
+                    "email": this.f.email.value,
+                    "phone": this.f.phone.value,
+                }
+            ]
+        }
+
+        localStorage.setItem('currentUserProfile', JSON.stringify(user));       
+       
+console.log(this.f.industry.value)
+
+
+        //this.loading = true;
+        //this.router.navigate(['/private']);
+       // console.log(this.f)
     }
+
+
+
+    test() {
+       console.log(localStorage.getItem('currentUserProfile'))
+    }
+
 }
+
