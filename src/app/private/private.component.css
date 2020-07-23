@@ -1,0 +1,39 @@
+.about_card_area {
+	margin: 0rem 2rem 0rem 1.5rem;
+}
+
+.card-img, .card-img-top {
+    border-top-left-radius: calc(.25rem - 1px);
+    border-top-right-radius: calc(.25rem - 1px);
+}
+.card-img, .card-img-bottom, .card-img-top {
+	flex-shrink: 0;
+	width: 100%;
+}
+img {
+	vertical-align: middle;
+	border-style: none;
+}
+
+.card {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+	word-wrap: break-word;
+	background-color: #fff;
+	background-clip: border-box;
+	border: 1px solid #2d3c64;
+	border-radius: .25rem;
+}
+
+
+.btnCustomBlue {
+	background-color: #4d69b0;
+	border-color: #2d3c64;
+}
+
+.card-headerCustom {
+	background-color: #4d69b0;
+	color: whitesmoke;
+}
