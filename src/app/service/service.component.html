@@ -1,68 +1,69 @@
-<div class="col-md-10 offset-md-1 mt-5 mb-5">
-    <div class="card">
-        <h4 class="card-header card-headerCustom">New Service Request</h4>
-        <div class="card-body">
-            <form [formGroup]="serviceForm" (ngSubmit)="onSubmit()">
-                <div class="row">
+<div class="container">  
+    <div class="col-md-10 offset-md-1 mt-5 mb-5">
+        <div class="card">
+            <h4 class="card-header card-headerCustom">New Service Request</h4>
+            <div class="card-body">
+                <form [formGroup]="serviceForm" (ngSubmit)="onSubmit()">
+                    <div class="row">
 
-                    <span class="col-md-12"><strong style="color:#4d69b0;">Brief description of the service request</strong> </span>
-                    <div class="dropdown-divider col-md-12"></div>
-                    <div class="form-group col-md-12">                        
-                        <textarea formControlName="sr_description" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.sr_description.errors }" > </textarea>
-                        <div *ngIf="submitted && f.sr_description.errors" class="invalid-feedback">
-                            <div *ngIf="f.sr_description.errors.required">Field required</div>
+                        <span class="col-md-12"><strong style="color:#4d69b0;">Brief description of the service request</strong> </span>
+                        <div class="dropdown-divider col-md-12"></div>
+                        <div class="form-group col-md-12">                        
+                            <textarea formControlName="sr_description" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.sr_description.errors }" > </textarea>
+                            <div *ngIf="submitted && f.sr_description.errors" class="invalid-feedback">
+                                <div *ngIf="f.sr_description.errors.required">Field required</div>
+                            </div>
                         </div>
+
+                        <span class="col-md-12"><strong style="color:#4d69b0;">Mechanical Components</strong> </span>
+                        <div class="dropdown-divider col-md-12"></div>                                  
+                        
+                        <div *ngFor="let item of checklist" class="form-check form-group col-md-6" >
+                            <input type="checkbox" [formControlName]="item.value" [(ngModel)]="item.isSelected" name="list_name" value="{{item.id}}" (change)="isAllSelected(item.id, 'mc')"/>
+                            {{item.text}}
+                            <img style="padding-left: 5px;" src="{{item.img}}" width="50" height="50" alt="" loading="lazy">                             
+                            <div class="form-check form-group col-md-12">
+                                <input type="string" *ngIf="isMcOtherSelected && item.value === 'mcother'" formControlName="mcotherinput" class="form-control" />
+                            </div>                   
+                        </div>
+
+                        <span class="col-md-12"><strong style="color:#4d69b0;">Lubricants</strong> </span>
+                        <div class="dropdown-divider col-md-12"></div>
+                        
+                        <div *ngFor="let item of lubricantchecklist" class="form-check form-group col-md-6" >
+                            <input type="checkbox" [formControlName]="item.value" [(ngModel)]="item.isSelected" name="list_name" value="{{item.id}}" (change)="isAllSelected(item.id, 'lubricant')"/>
+                            {{item.text}}     
+                            <div class="form-check form-group col-md-12">
+                                <input type="string" *ngIf="isLubricantOtherSelected && item.value === 'lubricantother'" formControlName="lubricantotherinput" class="form-control" />
+                            </div>                   
+                        </div>
+
+                        <span class="col-md-12"><strong style="color:#4d69b0;">Gears</strong> </span>
+                        <div class="dropdown-divider col-md-12"></div>
+
+                        <div *ngFor="let item of gearschecklist" class="form-check form-group col-md-6" >
+                            <input  type="checkbox" [formControlName]="item.value" [(ngModel)]="item.isSelected" name="list_name" value="{{item.id}}" (change)="isAllSelected(item.id, 'gears')"/>
+                            {{item.text}}
+                            <img style="padding-left: 5px;" src="{{item.img}}" width="50" height="50" alt="" loading="lazy">                             
+                            <div class="form-check form-group col-md-12">
+                                <input type="string" *ngIf="isGearOtherSelected  && item.value === 'gearsother'" formControlName="gearotherinput" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="dropdown-divider col-md-12"></div>
                     </div>
 
-                    <span class="col-md-12"><strong style="color:#4d69b0;">Mechanical Components</strong> </span>
-                    <div class="dropdown-divider col-md-12"></div>                                  
-                     
-                    <div *ngFor="let item of checklist" class="form-check form-group col-md-6" >
-                        <input type="checkbox" [formControlName]="item.value" [(ngModel)]="item.isSelected" name="list_name" value="{{item.id}}" (change)="isAllSelected(item.id, 'mc')"/>
-                        {{item.text}}
-                        <img style="padding-left: 5px;" src="{{item.img}}" width="50" height="50" alt="" loading="lazy">                             
-                        <div class="form-check form-group col-md-12">
-                            <input type="string" *ngIf="isMcOtherSelected && item.value === 'mcother'" formControlName="mcotherinput" class="form-control" />
-                        </div>                   
-                    </div>
-
-                    <span class="col-md-12"><strong style="color:#4d69b0;">Lubricants</strong> </span>
-                    <div class="dropdown-divider col-md-12"></div>
+                    <div class="form-group col-md-12 mt-2" style="text-align: right;">
+                        <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+                        <button [disabled]="loading" class="btnCustomBlue btn btn-primary text-right">
+                            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                            Save
+                        </button>
+                    </div>              
                     
-                    <div *ngFor="let item of lubricantchecklist" class="form-check form-group col-md-6" >
-                        <input type="checkbox" [formControlName]="item.value" [(ngModel)]="item.isSelected" name="list_name" value="{{item.id}}" (change)="isAllSelected(item.id, 'lubricant')"/>
-                        {{item.text}}     
-                        <div class="form-check form-group col-md-12">
-                            <input type="string" *ngIf="isLubricantOtherSelected && item.value === 'lubricantother'" formControlName="lubricantotherinput" class="form-control" />
-                        </div>                   
-                    </div>
-
-                    <span class="col-md-12"><strong style="color:#4d69b0;">Gears</strong> </span>
-                    <div class="dropdown-divider col-md-12"></div>
-
-                    <div *ngFor="let item of gearschecklist" class="form-check form-group col-md-6" >
-                        <input  type="checkbox" [formControlName]="item.value" [(ngModel)]="item.isSelected" name="list_name" value="{{item.id}}" (change)="isAllSelected(item.id, 'gears')"/>
-                        {{item.text}}
-                        <img style="padding-left: 5px;" src="{{item.img}}" width="50" height="50" alt="" loading="lazy">                             
-                        <div class="form-check form-group col-md-12">
-                            <input type="string" *ngIf="isGearOtherSelected  && item.value === 'gearsother'" formControlName="gearotherinput" class="form-control" />
-                        </div>
-                    </div>
-
-                    <div class="dropdown-divider col-md-12"></div>
-                </div>
-
-                <div class="form-group col-md-12 mt-2" style="text-align: right;">
-                    <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
-                    <button [disabled]="loading" class="btnCustomBlue btn btn-primary text-right">
-                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                        Save
-                    </button>
-                </div>              
-                
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 </div>
-
 
