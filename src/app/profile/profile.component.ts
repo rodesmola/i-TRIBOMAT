@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router} from '@angular/router';
+// import { Router} from '@angular/router';
 import { UserProfile } from '@app/_models';
 import { BehaviorSubject, Observable } from 'rxjs';
 //import { first } from 'rxjs/operators';
@@ -13,34 +13,31 @@ export class ProfileComponent {
     submitted = false;
     returnUrl: string;
     error = '';
+
     meetChecklist:any;
     isMeetOtherSelected: boolean;
     sectorChecklist:any;
     isSectorOtherSelected: boolean;
     statusChecklist:any;
-    isStatusOtherSelected: boolean;
-    selectedChecboxes: [];
+    isStatusOtherSelected: boolean;    
     userLegalStatus: string;
     userMeet: string;
     userSector: string;
-  
-    private currentUserProfileSubject: BehaviorSubject<UserProfile>;
-    public currentUserProfile: Observable<UserProfile>;
+      
+    private userProfile: BehaviorSubject<UserProfile>;
+    // public currentUserProfile: Observable<UserProfile>;
 
     constructor(
         // private userService: UserService,
-        //private router: Router,
-        
-        private formBuilder: FormBuilder,
-        
+        //private router: Router,      
+        private formBuilder: FormBuilder,        
     ) { 
   
-        this.currentUserProfileSubject = new BehaviorSubject<UserProfile>(JSON.parse(localStorage.getItem('currentUserProfile')));
-        this.currentUserProfile = this.currentUserProfileSubject.asObservable();
+        this.userProfile = new BehaviorSubject<UserProfile>(JSON.parse(localStorage.getItem('currentUserProfile')));
         
         this.isSectorOtherSelected = false;
         this.sectorChecklist = [
-            {id:0,text:'Transport', value:'transport', isSelected:true},
+            {id:0,text:'Transport', value:'transport', isSelected:false},
             {id:1,text:'Energy', value:'energy', isSelected:false},
             {id:2,text:'Machinery', value:'machinery', isSelected:false},
             {id:3,text:'Health', value:'health', isSelected:false},
@@ -52,7 +49,7 @@ export class ProfileComponent {
         ]
         this.isStatusOtherSelected = false;
         this.statusChecklist = [
-            {id:0,text:'Industry', value:'industry', isSelected:true},
+            {id:0,text:'Industry', value:'industry', isSelected:false},
             {id:1,text:'SME', value:'sme', isSelected:false},
             {id:2,text:'Non-profit research org.', value:'nonprofit', isSelected:false},
             {id:3,text:'Public body', value:'publicbody', isSelected:false},
@@ -61,7 +58,7 @@ export class ProfileComponent {
         ]
         this.isMeetOtherSelected = false;
         this.meetChecklist = [
-            {id:0,text:'Searching a service', value:'searching', isSelected:true},
+            {id:0,text:'Searching a service', value:'searching', isSelected:false},
             {id:1,text:'Congress', value:'congress', isSelected:false},
             {id:2,text:'Social media', value:'socialmedia', isSelected:false},
             {id:3,text:'i-TRIBOMAT web', value:'web', isSelected:false},
@@ -70,35 +67,71 @@ export class ProfileComponent {
     }
 
     ngOnInit() {
-        
+                     
+        for (var i = 0; i < this.sectorChecklist.length; i++) {
+            if(this.sectorChecklist[i].value === this.userProfile.value.industrial_sector){
+                this.sectorChecklist[i].isSelected = true                        
+            }       
+        }
+
+        if(this.sectorChecklist.every(check => check.isSelected == false)){
+            this.sectorChecklist[8].isSelected = true
+            this.isSectorOtherSelected = true;
+            this.userSector = this.userProfile.value.industrial_sector
+        }
+
+        for (var i = 0; i < this.statusChecklist.length; i++) {
+            if(this.statusChecklist[i].value === this.userProfile.value.legal_status){
+                this.statusChecklist[i].isSelected = true                        
+            }       
+        }
+
+        if(this.statusChecklist.every(check => check.isSelected == false)){
+            this.statusChecklist[5].isSelected = true
+            this.isStatusOtherSelected = true;
+            this.userLegalStatus = this.userProfile.value.legal_status
+        }
+
+        for (var i = 0; i < this.meetChecklist.length; i++) {
+            if(this.meetChecklist[i].value === this.userProfile.value.how_meet_us){
+                this.meetChecklist[i].isSelected = true                        
+            }       
+        }
+
+        if(this.meetChecklist.every(check => check.isSelected == false)){
+            this.meetChecklist[4].isSelected = true
+            this.isMeetOtherSelected = true;
+            this.userMeet = this.userProfile.value.how_meet_us
+        }
+
         this.profileForm = this.formBuilder.group({
-            legal_name: ['1', Validators.required],
-            short_name: ['1', Validators.required],
-            department: ['1', Validators.required],
-            street: ['1', Validators.required],
-            town: ['1', Validators.required],
-            postcode: ['1', Validators.required],
-            country: ['1', Validators.required],
-            webpage: ['1', Validators.required],
-            first_name: ['1', Validators.required],
-            last_name: ['1', Validators.required],
-            email: ['1', Validators.required],
-            phone: ['1', Validators.required],
-            fax: ['1', Validators.required],
-            location: ['1', Validators.required],
-            invoice_street: ['1', Validators.required],
-            invoice_town: ['1', Validators.required],
-            invoice_postcode: ['1', Validators.required],
-            invoice_country: ['1', Validators.required],
-            invoice_web: ['1', Validators.required],
-            vatNumber: ['1', Validators.required],
-            invoice_terms: ['1', Validators.required],            
+            legal_name: [this.userProfile.value.legal_name, Validators.required],
+            short_name: [this.userProfile.value.short_name, Validators.required],
+            department: [this.userProfile.value.department, Validators.required],
+            street: [this.userProfile.value.street, Validators.required],
+            town: [this.userProfile.value.town, Validators.required],
+            postcode: [this.userProfile.value.postcode, Validators.required],
+            country: [this.userProfile.value.country, Validators.required],
+            webpage: [this.userProfile.value.webpage, Validators.required],
+            first_name: [this.userProfile.value.contactPersons[0].first_name, Validators.required],
+            last_name: [this.userProfile.value.contactPersons[0].last_name, Validators.required],
+            email: [this.userProfile.value.contactPersons[0].email, Validators.required],
+            phone: [this.userProfile.value.contactPersons[0].phone, Validators.required],
+            fax: [this.userProfile.value.contactPersons[0].fax, Validators.required],
+            location: [this.userProfile.value.location, Validators.required],
+            invoice_street: [this.userProfile.value.invoice_street, Validators.required],
+            invoice_town: [this.userProfile.value.invoice_town, Validators.required],
+            invoice_postcode: [this.userProfile.value.invoice_postcode, Validators.required],
+            invoice_country: [this.userProfile.value.invoice_country, Validators.required],
+            invoice_web: [this.userProfile.value.invoice_web, Validators.required],
+            vatNumber: [this.userProfile.value.vatNumber, Validators.required],
+            invoice_terms: [this.userProfile.value.invoice_terms, Validators.required],            
             searching: ['true'], 
             congress: ['false'], 
             socialmedia: ['false'], 
             web: ['false'], 
             meetother: ['false'],
-            meetotherinput: [''],
+            meetotherinput: [this.userProfile.value.how_meet_us],
             transport: ['true'], 
             energy: ['false'],
             machinery: ['false'],
@@ -108,14 +141,14 @@ export class ProfileComponent {
             mining: ['false'],
             agriculture: ['false'],
             sectorother: ['false'],
-            sectorotherinput: [''],
+            sectorotherinput: [this.userProfile.value.industrial_sector],
             industry: ['true'], 
             sme: ['false'],            
             nonprofit: ['false'],
             publicbody: ['false'],
             nongovermental: ['false'],
             statusother: ['false'],
-            statusotherinput: [''],
+            statusotherinput: [this.userProfile.value.legal_status],
         });
     }
     // convenience getter for easy access to form fields
@@ -141,7 +174,7 @@ export class ProfileComponent {
             if(list === 'meet'){
                 if (e === 4){
                     this.isMeetOtherSelected = true;
-                    this.userMeet = "other"
+                    this.userMeet = ""
                 }else{
                     this.isMeetOtherSelected = false;
                     this.userMeet = currentlist[e].value
@@ -149,7 +182,7 @@ export class ProfileComponent {
             }else if(list === 'sector'){
                 if (e === 8){
                     this.isSectorOtherSelected = true;
-                    this.userSector = "other"
+                    this.userSector = ""
                 }else{
                     this.isSectorOtherSelected = false;
                     this.userSector = currentlist[e].value
@@ -157,14 +190,14 @@ export class ProfileComponent {
             }else{
                 if (e === 5){
                     this.isStatusOtherSelected = true;
-                    this.userLegalStatus = "other"
+                    this.userLegalStatus = ""
                 }else{
                     this.isStatusOtherSelected = false;
                     this.userLegalStatus = currentlist[e].value
                 }
             }              
         }
-
+                
       }
 
     onSubmit() {
@@ -175,13 +208,13 @@ export class ProfileComponent {
             return;
         }  
 
-        if(this.userLegalStatus === 'other'){
+        if(this.statusChecklist[5].isSelected === true){
             this.userLegalStatus = this.f.statusotherinput.value
         }
-        if(this.userMeet === 'other'){
+        if(this.meetChecklist[4].isSelected === true){
             this.userMeet = this.f.meetotherinput.value
         }
-        if(this.userSector === 'other'){
+        if(this.sectorChecklist[8].isSelected === true){
             this.userSector = this.f.sectorotherinput.value
         }
 
@@ -202,35 +235,24 @@ export class ProfileComponent {
             "invoice_web": this.f.invoice_web.value,
             "vatNumber": this.f.vatNumber.value,
             "invoice_terms": this.f.invoice_terms.value,
-
             "legal_status": this.userLegalStatus,
             "industrial_sector": this.userSector,
             "how_meet_us": this.userMeet,
-
             "contactPersons": [
                 {
-                    "firstName": this.f.first_name.value,
-                    "lastName": this.f.last_name.value,                    
+                    "first_name": this.f.first_name.value,
+                    "last_name": this.f.last_name.value,                    
                     "email": this.f.email.value,
                     "phone": this.f.phone.value,
+                    "fax": this.f.fax.value,
                 }
             ]
         }
 
         localStorage.setItem('currentUserProfile', JSON.stringify(user));       
-       
-console.log(this.f.industry.value)
-
-
         //this.loading = true;
         //this.router.navigate(['/private']);
-       // console.log(this.f)
-    }
 
-
-
-    test() {
-       console.log(localStorage.getItem('currentUserProfile'))
     }
 
 }
