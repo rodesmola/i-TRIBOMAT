@@ -1,13 +1,24 @@
-.hero_area {
-	background-image: url(https://www.i-tribomat.eu/img/solution.png);
+.header_area {
+	background-image: url(../../assets/home_header.png);
 	background-position: center center;
 	background-repeat: no-repeat;
 	background-size: cover;
-	height: 800px;
+	height: 340px;
     padding: 0;
-    width: 500px;
+    width: 100%;
 }
 
+.image {
+	vertical-align: middle;
+	text-align: center;
+}
+
+.responsiveimg {
+	width: 65%;
+	height: auto;
+	margin-top: 50px; 
+	margin-bottom: 30px;
+}
 
 .contact_area {
 	height: 30rem;
