@@ -6,7 +6,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
 //import { first } from 'rxjs/operators';
 //import { UserService, AuthenticationService } from '@app/_services';
 
-@Component({ templateUrl: './profile.component.html' })
+@Component({ 
+    templateUrl: './profile.component.html' ,
+    styleUrls: ['./profile.component.css']})
 export class ProfileComponent {
     profileForm: FormGroup;
     loading = false;
