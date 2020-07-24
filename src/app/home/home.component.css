@@ -100,3 +100,52 @@
 	color: rgb(255, 255, 255);
 	text-decoration: none;
 }
+
+.card_title {
+	font-family: 'Roboto Condensed', sans-serif;
+    text-align: left;
+    line-height: 1.875rem;
+    letter-spacing: 0rem;
+    font-weight: 400;
+    font-size: 1.25rem;
+    border-style: none;
+    margin: 0rem;
+    border-radius: 0rem;
+    padding: 0rem;
+    color: #174A92;
+    text-decoration: none;
+}
+
+.card_text {
+	font-family:Lato,Arial,Helvetica,sans-serif;
+    text-align: left;
+    line-height: 1.5rem;
+    letter-spacing: 0rem;
+    font-weight: 400;
+    font-size: 1rem;
+    border-style: none;
+    margin: 0rem;
+    border-radius: 0rem;
+    padding: 0rem;
+    color: #5D5F64;
+    text-decoration: none;
+}
+
+.card_link {
+	font-family:Lato,Arial,Helvetica,sans-serif;
+    text-align: left;
+    line-height: 1.3rem;
+    letter-spacing: 0rem;
+    font-weight: 400;
+    font-size: 0.875rem;
+    border-style: none;
+    margin: 0rem;
+    border-radius: 0rem;
+    padding: 0rem;
+    color: #174A92;
+    text-decoration: none !important;
+}
+
+.card_area {
+	padding: 0rem 3.2rem 0rem 3.2rem;
+}
