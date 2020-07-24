@@ -8,6 +8,32 @@
     width: 100%;
 }
 
+.header_content {
+	padding: 70px 0;
+}
+
+
+.header_content h1 {
+	color: #4d69b0;
+	font-weight: 900;
+	font-size: 45px;
+	text-align: left;
+	font-family: "Century Gothic", sans-serif;
+}
+
+
+.header_content h2 {
+	color: #2c3c64;
+	font-weight: 900;
+	font-size: 38px;
+	margin-top: 0;
+	width: 100%;
+	line-height: 40px;
+	text-align: left;
+	font-family: "Century Gothic", sans-serif;
+	width: 90%;
+}
+
 .image {
 	vertical-align: middle;
 	text-align: center;
