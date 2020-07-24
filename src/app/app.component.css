@@ -1,3 +1,23 @@
+
+.navbar_text{
+	color: #5d5f64;
+	font-family: 'Roboto Condensed', Arial, Helvetica, sans-serif;
+	font-weight: 400;
+	font-size: 1rem;
+	letter-spacing: 0.077rem;
+	font-style: normal;
+}
+
+.navbar_text_active{
+	color: #174a92;
+	font-family: 'Roboto Condensed', Arial, Helvetica, sans-serif;
+	font-weight: 500;
+	font-size: 1rem;
+	letter-spacing: 0.063rem;
+	font-style: normal;
+	font-weight: bold;
+}
+
 .footer_title {
 	font-family: 'Source Sans Pro', Arial, Helvetica, sans-serif !important;
     text-align: left;

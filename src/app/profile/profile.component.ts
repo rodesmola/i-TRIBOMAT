@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-// import { Router} from '@angular/router';
+import { Router} from '@angular/router';
 import { UserProfile } from '@app/_models';
 import { BehaviorSubject, Observable } from 'rxjs';
 //import { first } from 'rxjs/operators';
@@ -31,7 +31,7 @@ export class ProfileComponent {
 
     constructor(
         // private userService: UserService,
-        //private router: Router,      
+        private router: Router,      
         private formBuilder: FormBuilder,        
     ) { 
   
@@ -252,8 +252,8 @@ export class ProfileComponent {
         }
 
         localStorage.setItem('currentUserProfile', JSON.stringify(user));       
-        //this.loading = true;
-        //this.router.navigate(['/private']);
+        this.loading = true;
+        this.router.navigate(['/private']);
 
     }
 

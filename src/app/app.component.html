@@ -5,20 +5,28 @@
     </a>
     <ul class="navbar-nav ml-auto"> 
       <li class="nav-item"> 
-          <a class="nav-item nav-link" routerLink="/">Home</a>
+          <a class="nav-item nav-link navbar_text" routerLink="/">Home</a>
       </li> 
       <li class="nav-item" *ngIf="!currentUser"> 
-          <a class="nav-item nav-link" routerLink="/login">Login</a>
+          <a class="nav-item nav-link navbar_text" routerLink="/login">Sign in</a>
       </li> 
       <li class="nav-item" *ngIf="currentUser"> 
-        <!-- <a class="nav-item nav-link" routerLink="/private">Private</a> -->
-        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit" routerLink="/private">Private</button>
+        <a class="nav-item nav-link" routerLink="/private"> <strong>Private</strong> </a>
+        <!-- <button class="btn btn-outline-primary my-2 my-sm-0" type="submit" routerLink="/private">Private</button> -->
       </li> 
       <!-- <li class="nav-item" *ngIf="currentUser"> 
         <a class="nav-item nav-link" routerLink="/profile">Profile</a>
       </li>  -->
       <li class="nav-item" *ngIf="currentUser"> 
-          <a class="nav-item nav-link" (click)="logout()">Logout</a> 
+          <!-- <a class="nav-item nav-link navbar_text" (click)="logout()">Sign out</a>  -->
+
+        <a class="nav-item nav-link navbar_text" (click)="logout()" title="Sign out">
+          <svg width="1.6em" height="1.6em" viewBox="0 0 16 16" class="bi bi-box-arrow-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M11.646 11.354a.5.5 0 0 1 0-.708L14.293 8l-2.647-2.646a.5.5 0 0 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0z"/>
+            <path fill-rule="evenodd" d="M4.5 8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5z"/>
+            <path fill-rule="evenodd" d="M2 13.5A1.5 1.5 0 0 1 .5 12V4A1.5 1.5 0 0 1 2 2.5h7A1.5 1.5 0 0 1 10.5 4v1.5a.5.5 0 0 1-1 0V4a.5.5 0 0 0-.5-.5H2a.5.5 0 0 0-.5.5v8a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5v-1.5a.5.5 0 0 1 1 0V12A1.5 1.5 0 0 1 9 13.5H2z"/>
+          </svg>
+        </a> 
       </li> 
     </ul>
   </div> 

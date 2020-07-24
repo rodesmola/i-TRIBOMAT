@@ -1,9 +1,11 @@
 ﻿<div class="container">  
     <div class="col-md-6 offset-md-3 mt-5 mb-5">
-        <div class="alert alert-info">
+        <!-- <div class="alert alert-info">
             Email: user@mail.com<br />
             Password: 1234
-        </div>
+        </div> -->
+        <div class="col-md-12" style="height: 100px;"></div>
+
         <div class="card">
             <h4 class="card-header" style="text-align: center;">
                 <img src="./assets/itribomatlogo.svg" width="130" height="30" alt="" loading="lazy">
@@ -11,7 +13,7 @@
             <div class="card-body">
                 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                     <div class="form-group">
-                        <label for="email">Email</label>
+                        <label for="email">Email user@mail.com</label>
                         <input type="email" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
                         <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
                             <div *ngIf="f.email.errors.required">email is required</div>
@@ -27,7 +29,7 @@
                     New user?
                     <a routerLink="/register">click to register!</a>
                     <div class="form-group col-md-12" style="text-align: right;">
-                        <button [disabled]="loading" class="btn btn-primary">
+                        <button [disabled]="loading" class="btn btnCustomBlue btn-primary">
                             <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                             Login
                         </button>
@@ -37,5 +39,8 @@
                 </form>
             </div>
         </div>
+
+        <div class="col-md-12" style="height: 100px;"></div>
+
     </div>
 </div>

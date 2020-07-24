@@ -1,5 +1,7 @@
 <div class="container">  
     <div class="col-md-6 offset-md-3 mt-5 mb-5">
+        <div class="col-md-12" style="height: 50px;"></div>
+
         <div class="card">
             <h4 class="card-header" style="text-align: center;">
                 <img src="./assets/itribomatlogo.svg" width="130" height="30" alt="" loading="lazy">
@@ -41,9 +43,10 @@
                             <div *ngIf="f.password_conf.errors.required">Password confirmation is required</div>
                         </div>
                     </div>                
-                    <a class="nav-item nav-link" routerLink="/login">Login</a>
+                    Already registered?
+                    <a routerLink="/login">click to sign in!</a>
                     <div class="form-group col-md-12" style="text-align: right;">
-                        <button [disabled]="loading" class="btn btn-primary">
+                        <button [disabled]="loading" class="btn btnCustomBlue btn-primary">
                             <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                             Register
                         </button>
@@ -52,5 +55,6 @@
                 </form>
             </div>
         </div>
+        <div class="col-md-12" style="height: 50px;"></div>
     </div>
 </div>
