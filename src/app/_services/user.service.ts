@@ -2,13 +2,17 @@
 import { HttpClient } from '@angular/common/http';
 
 import { environment } from '@environments/environment';
-import { User } from '@app/_models';
+import { map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
     constructor(private http: HttpClient) { }
-    // Metodo para recuperar todos los users, no se esta usando
-    // getAll() {
-    //     return this.http.get<User[]>(`${environment.apiUrl}/users`);
-    // }
+
+
+    saveProfile(profile: object) {        
+        return this.http.post<any>(`${environment.apiUrl}/customerinfo`, profile)
+            .pipe(map(user => {
+                return user;
+            }));
+    }
 }

@@ -2,9 +2,11 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router} from '@angular/router';
 import { UserProfile } from '@app/_models';
-import { BehaviorSubject, Observable } from 'rxjs';
-//import { first } from 'rxjs/operators';
-//import { UserService, AuthenticationService } from '@app/_services';
+import { BehaviorSubject } from 'rxjs';
+
+
+import { first } from 'rxjs/operators';
+import { UserService } from '@app/_services';
 
 @Component({ 
     templateUrl: './profile.component.html' ,
@@ -30,10 +32,11 @@ export class ProfileComponent {
     // public currentUserProfile: Observable<UserProfile>;
 
     constructor(
-        // private userService: UserService,
+        private userService: UserService,
         private router: Router,      
-        private formBuilder: FormBuilder,        
-    ) { 
+        private formBuilder: FormBuilder,    
+
+        ) { 
   
         this.userProfile = new BehaviorSubject<UserProfile>(JSON.parse(localStorage.getItem('currentUserProfile')));
         
@@ -115,11 +118,15 @@ export class ProfileComponent {
             postcode: [this.userProfile.value.postcode, Validators.required],
             country: [this.userProfile.value.country, Validators.required],
             webpage: [this.userProfile.value.webpage, Validators.required],
-            first_name: [this.userProfile.value.contactPersons[0].first_name, Validators.required],
-            last_name: [this.userProfile.value.contactPersons[0].last_name, Validators.required],
-            email: [this.userProfile.value.contactPersons[0].email, Validators.required],
-            phone: [this.userProfile.value.contactPersons[0].phone, Validators.required],
-            fax: [this.userProfile.value.contactPersons[0].fax, Validators.required],
+            email: [this.userProfile.value.email, Validators.required],
+            phone: [this.userProfile.value.phone, Validators.required],
+            fax: [this.userProfile.value.fax, Validators.required],
+            firstName: [this.userProfile.value.contactPersons[0].firstName, Validators.required],
+            lastName: [this.userProfile.value.contactPersons[0].lastName, Validators.required],
+            email_cp: [this.userProfile.value.contactPersons[0].email, Validators.required],
+            phone_cp: [this.userProfile.value.contactPersons[0].phone, Validators.required],
+            fax_cp: [this.userProfile.value.contactPersons[0].fax, Validators.required],
+            position_cp: [this.userProfile.value.contactPersons[0].position, Validators.required],
             location: [this.userProfile.value.location, Validators.required],
             invoice_street: [this.userProfile.value.invoice_street, Validators.required],
             invoice_town: [this.userProfile.value.invoice_town, Validators.required],
@@ -220,7 +227,8 @@ export class ProfileComponent {
             this.userSector = this.f.sectorotherinput.value
         }
 
-        var user = {           
+        var user = {   
+            "customer_id": "ATOS",
             "legal_name": this.f.legal_name.value,
             "short_name": this.f.short_name.value,
             "department": this.f.department.value,
@@ -236,24 +244,38 @@ export class ProfileComponent {
             "invoice_country": this.f.invoice_country.value,
             "invoice_web": this.f.invoice_web.value,
             "vatNumber": this.f.vatNumber.value,
+            "email": this.f.email.value,
+            "phone": this.f.phone.value,
+            "fax": this.f.fax.value,
             "invoice_terms": this.f.invoice_terms.value,
             "legal_status": this.userLegalStatus,
             "industrial_sector": this.userSector,
             "how_meet_us": this.userMeet,
             "contactPersons": [
                 {
-                    "first_name": this.f.first_name.value,
-                    "last_name": this.f.last_name.value,                    
-                    "email": this.f.email.value,
-                    "phone": this.f.phone.value,
-                    "fax": this.f.fax.value,
+                    "firstName": this.f.firstName.value,
+                    "lastName": this.f.lastName.value,                    
+                    "email": this.f.email_cp.value,
+                    "phone": this.f.phone_cp.value,
+                    "fax": this.f.fax_cp.value,
+                    "position": this.f.position_cp.value,
                 }
             ]
         }
 
-        localStorage.setItem('currentUserProfile', JSON.stringify(user));       
         this.loading = true;
-        this.router.navigate(['/private']);
+        this.userService.saveProfile(user)
+            .pipe(first())
+            .subscribe(
+                data => {
+                    localStorage.setItem('currentUserProfile', JSON.stringify(user));       
+                    this.loading = false;
+                    this.router.navigate(['/private']);
+                },
+                error => {
+                    this.loading = false;
+                    this.error = 'Something went wrong...';
+                });
 
     }
 

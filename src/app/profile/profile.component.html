@@ -33,11 +33,35 @@
                             </div>
                         </div>
 
-                        <div class="form-group col-md-8">
+                        <div class="form-group col-md-6">
                             <label for="webpage">Web</label>
                             <input type="text" formControlName="webpage" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.webpage.errors }" />
                             <div *ngIf="submitted && f.webpage.errors" class="invalid-feedback">
-                                <div *ngIf="f.webpage.errors.required">Web code is required</div>
+                                <div *ngIf="f.webpage.errors.required">Web is required</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="email">Email</label>
+                            <input type="email" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                <div *ngIf="f.email.errors.required">Email is required</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="phone">Phone</label>
+                            <input type="text" formControlName="phone" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.phone.errors }" />
+                            <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+                                <div *ngIf="f.phone.errors.required">Phone code is required</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="fax">Fax</label>
+                            <input type="text" formControlName="fax" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.fax.errors }" />
+                            <div *ngIf="submitted && f.fax.errors" class="invalid-feedback">
+                                <div *ngIf="f.fax.errors.required">Fax number is required</div>
                             </div>
                         </div>
 
@@ -88,42 +112,49 @@
                         <div class="dropdown-divider col-md-12" style="margin-bottom: 15px;"></div>
 
                         <div class="form-group col-md-4">
-                            <label for="first_name">First name</label>
-                            <input type="text" formControlName="first_name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.first_name.errors }" />
-                            <div *ngIf="submitted && f.first_name.errors" class="invalid-feedback">
-                                <div *ngIf="f.first_name.errors.required">First name code is required</div>
+                            <label for="firstName">First name</label>
+                            <input type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+                            <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+                                <div *ngIf="f.firstName.errors.required">First name code is required</div>
                             </div>
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="last_name">Last name</label>
-                            <input type="text" formControlName="last_name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.last_name.errors }" />
-                            <div *ngIf="submitted && f.last_name.errors" class="invalid-feedback">
-                                <div *ngIf="f.last_name.errors.required">Last name code is required</div>
+                            <label for="lastName">Last name</label>
+                            <input type="text" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+                            <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+                                <div *ngIf="f.lastName.errors.required">Last name is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="position_cp">Position</label>
+                            <input type="text" formControlName="position_cp" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.position_cp.errors }" />
+                            <div *ngIf="submitted && f.position_cp.errors" class="invalid-feedback">
+                                <div *ngIf="f.position_cp.errors.required">Position number is required</div>
                             </div>
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="phone">Phone</label>
-                            <input type="text" formControlName="phone" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.phone.errors }" />
-                            <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
-                                <div *ngIf="f.phone.errors.required">Phone code is required</div>
-                            </div>
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            <label for="email">Email</label>
-                            <input type="email" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
-                            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                                <div *ngIf="f.email.errors.required">Email code is required</div>
+                            <label for="phone_cp">Phone</label>
+                            <input type="text" formControlName="phone_cp" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.phone_cp.errors }" />
+                            <div *ngIf="submitted && f.phone_cp.errors" class="invalid-feedback">
+                                <div *ngIf="f.phone_cp.errors.required">Phone number is required</div>
                             </div>
                         </div>
 
                         <div class="form-group col-md-4">
-                            <label for="fax">Fax</label>
-                            <input type="text" formControlName="fax" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.fax.errors }" />
-                            <div *ngIf="submitted && f.fax.errors" class="invalid-feedback">
-                                <div *ngIf="f.fax.errors.required">Fax code is required</div>
+                            <label for="email_cp">Email</label>
+                            <input type="email" formControlName="email_cp" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email_cp.errors }" />
+                            <div *ngIf="submitted && f.email_cp.errors" class="invalid-feedback">
+                                <div *ngIf="f.email_cp.errors.required">Email code is required</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="fax_cp">Fax</label>
+                            <input type="text" formControlName="fax_cp" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.fax_cp.errors }" />
+                            <div *ngIf="submitted && f.fax_cp.errors" class="invalid-feedback">
+                                <div *ngIf="f.fax_cp.errors.required">Fax number is required</div>
                             </div>
                         </div>
 
@@ -161,7 +192,7 @@
                             <label for="invoice_postcode">Invoice Post code</label>
                             <input type="number" formControlName="invoice_postcode" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.invoice_postcode.errors }" />
                             <div *ngIf="submitted && f.invoice_postcode.errors" class="invalid-feedback">
-                                <div *ngIf="f.invoice_postcode.errors.required">Invoice Post code code is required</div>
+                                <div *ngIf="f.invoice_postcode.errors.required">Invoice Post code is required</div>
                             </div>
                         </div>
 
@@ -223,7 +254,7 @@
                     </div>
 
                     <div class="form-group col-md-12 mt-2" style="text-align: right;">
-                        <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+                        <div *ngIf="error" class="alert alert-danger mt-3 mb-3">{{error}}</div>
                         <button [disabled]="loading" class="btnCustomBlue btn btn-primary text-right">
                             <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                             Save

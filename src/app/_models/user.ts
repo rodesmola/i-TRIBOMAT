@@ -32,17 +32,21 @@ export class UserProfile {
     "invoice_country": string;
     "invoice_web": string;
     "vatNumber": string;
+    "email": string;
+    "phone": string;
+    "fax": string;
     "invoice_terms": string;
     "legal_status": string;
     "industrial_sector": string;
     "how_meet_us": string;    
     "contactPersons": [
         {
-            "first_name": string;
-            "last_name": string;           
+            "firstName": string;
+            "lastName": string;           
             "email": string;
             "phone": string;
             "fax": string;
+            "position": string;
         }
     ]
 }

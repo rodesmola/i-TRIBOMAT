@@ -38,7 +38,7 @@
                     </div>
                     <div class="form-group">
                         <label for="password_conf">Confirm password</label>
-                        <input type="password_conf" formControlName="password_conf" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password_conf.errors }" />
+                        <input type="password" formControlName="password_conf" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password_conf.errors }" />
                         <div *ngIf="submitted && f.password_conf.errors" class="invalid-feedback">
                             <div *ngIf="f.password_conf.errors.required">Password confirmation is required</div>
                         </div>
