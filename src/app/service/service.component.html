@@ -9,16 +9,24 @@
                         <span class="col-md-12"><strong style="color:#4d69b0;">Brief description of the service request</strong> </span>
                         <div class="dropdown-divider col-md-12"></div>
                         <div class="form-group col-md-12">                        
-                            <textarea formControlName="sr_description" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.sr_description.errors }" > </textarea>
+                            <textarea rows="6" formControlName="sr_description" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.sr_description.errors }" > </textarea>
                             <div *ngIf="submitted && f.sr_description.errors" class="invalid-feedback">
                                 <div *ngIf="f.sr_description.errors.required">Field required</div>
                             </div>
                         </div>
 
-                        <span class="col-md-12"><strong style="color:#4d69b0;">Mechanical Components</strong> </span>
+                        <span class="col-md-12"><strong style="color:#4d69b0;">Nature of the request service</strong> </span>
                         <div class="dropdown-divider col-md-12"></div>                                  
                         
-                        <div *ngFor="let item of checklist" class="form-check form-group col-md-6" >
+                        <div *ngFor="let item of natureChecklist" class="form-check form-group col-md-12 ma-1" >
+                            <input type="checkbox" [formControlName]="item.value" [(ngModel)]="item.isSelected" name="list_name" value="{{item.id}}" (change)="isAllSelected(item.id, 'nature')"/>
+                            {{item.text}}            
+                        </div>
+
+                        <span class="col-md-12 mt-2"><strong style="color:#4d69b0;">Mechanical Components</strong> </span>
+                        <div class="dropdown-divider col-md-12"></div>                                  
+                        
+                        <div *ngFor="let item of mcChecklist" class="form-check form-group col-md-6" >
                             <input type="checkbox" [formControlName]="item.value" [(ngModel)]="item.isSelected" name="list_name" value="{{item.id}}" (change)="isAllSelected(item.id, 'mc')"/>
                             {{item.text}}
                             <img style="padding-left: 5px;" src="{{item.img}}" width="50" height="50" alt="" loading="lazy">                             

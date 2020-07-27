@@ -4,7 +4,6 @@ import { Router} from '@angular/router';
 import { UserProfile } from '@app/_models';
 import { BehaviorSubject } from 'rxjs';
 
-
 import { first } from 'rxjs/operators';
 import { UserService } from '@app/_services';
 

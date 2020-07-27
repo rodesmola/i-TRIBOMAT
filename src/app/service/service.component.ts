@@ -1,8 +1,9 @@
-import { Component, OnInit, NgModule  } from '@angular/core';
+import { Component, OnInit  } from '@angular/core';
 
-import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
-// import { Router, ActivatedRoute } from '@angular/router';
-// import { AuthenticationService } from '@app/_services';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router} from '@angular/router';
+import { RequestService } from '@app/_services';
+import { first } from 'rxjs/operators';
 
 
 @Component({
@@ -18,24 +19,34 @@ export class ServiceComponent implements OnInit {
   // returnUrl: string;
   error = '';
 
-  checklist:any;
+  mcChecklist:any;
   gearschecklist: any;
   lubricantchecklist: any;
+  natureChecklist: any;
   isMcOtherSelected: boolean;
   isGearOtherSelected: boolean;
   isLubricantOtherSelected: boolean;
 
+  mcValue: any;
+  gearValue: any;
+  lubricantValue: any;
+
+
   constructor(
     private formBuilder: FormBuilder,
-
-    // private router: Router,
+    private requestService: RequestService,
+    private router: Router,
     // private route: ActivatedRoute,
     // private authenticationService: AuthenticationService
   ) {     
     this.isMcOtherSelected = false;
     this.isGearOtherSelected = false;
     this.isLubricantOtherSelected = false;
-    this.checklist = [
+    this.mcValue =  'gears';
+    this.gearValue =  'mineraloil';
+    this.lubricantValue =  'twindisc';
+
+    this.mcChecklist = [
       {id:0,text:'Gears', value:'gears', img: './assets/gear.png',isSelected:true},
       {id:1,text:'Ball bearing', value:'ballbearing', img: './assets/ball_bearing.png',isSelected:false},
       {id:2,text:'Roller bearing', value:'rollerbearing', img: './assets/roller_bearing.png',isSelected:false},
@@ -60,6 +71,12 @@ export class ServiceComponent implements OnInit {
       {id:2,text:'Helical gears', value:'helicalgears', img: './assets/helical_gear.png',isSelected:false},
       {id:3,text:'Other', value:'gearsother', img: 'gearsother',isSelected:false}
     ] 
+    this.natureChecklist = [
+      {id:0,text:'Standarised tribological characterisation services (experimental)', value:'stc',isSelected:true},
+      {id:1,text:'Data driven services', value:'dds',isSelected:false},
+      {id:2,text:'Virtual workrooms and up-scaling services (modelling)', value:'vw',isSelected:false},
+      {id:3,text:'Complementary services', value:'cs',isSelected:false}
+    ]
   }
 
   ngOnInit(): void {
@@ -87,6 +104,10 @@ export class ServiceComponent implements OnInit {
       greases: ['false'],
       lubricantother: ['false'],
       lubricantotherinput: [''], 
+      stc: ['false'],
+      dds: ['false'],
+      vw: ['false'],
+      cs: ['false'],
 
     });
     // this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/private';
@@ -101,8 +122,10 @@ export class ServiceComponent implements OnInit {
     
     }else if (list === 'lubricant'){
       currentlist = this.lubricantchecklist
+    }else if (list === 'nature'){
+      currentlist = this.natureChecklist
     }else{
-      currentlist = this.checklist
+      currentlist = this.mcChecklist
     }
 
     for (var i = 0; i < currentlist.length; i++) {
@@ -113,20 +136,26 @@ export class ServiceComponent implements OnInit {
       if(list === 'mc'){
         if (e === 8){
           this.isMcOtherSelected = true;
+          //this.mcValue = this.f.mcotherinput.value;                   
         }else{
           this.isMcOtherSelected = false;
+          this.mcValue = currentlist[e].value;
         }
       }else if(list === 'lubricant'){
         if (e === 5){
           this.isLubricantOtherSelected = true;
+          //this.lubricantValue = this.f.lubricantotherinput.value;
         }else{
-          this.isLubricantOtherSelected = false;
+          this.isLubricantOtherSelected = false;         
+          this.lubricantValue = currentlist[e].value;
         }
       }else{
         if (e === 3){
           this.isGearOtherSelected = true;
+          //this.gearValue = this.f.gearotherinput.value;          
         }else{
-          this.isGearOtherSelected = false;
+          this.isGearOtherSelected = false;          
+          this.gearValue = currentlist[e].value;
         }
       }
 
@@ -136,6 +165,45 @@ export class ServiceComponent implements OnInit {
   get f() { return this.serviceForm.controls; }
 
   onSubmit() {
+
+    this.submitted = true;
+
+    // stop here if form is invalid
+    if (this.serviceForm.invalid) {
+        return;
+    }  
+
+    if(this.isMcOtherSelected){
+      this.mcValue = this.f.mcotherinput.value;
+    } 
+    if(this.isLubricantOtherSelected){
+      this.lubricantValue = this.f.lubricantotherinput.value;
+    }
+    if(this.isGearOtherSelected){
+      this.gearValue = this.f.gearotherinput.value;    
+    }    
+
+    var request = {
+      "customer_id": "ATOS",
+      "sr_description": this.f.sr_description.value,
+      "sr_mechanicalComponent": this.mcValue,
+      "sr_lubricant": this.lubricantValue,
+      "sr_lubricantProperties": "none",
+      "gears": this.gearValue      
+    }
+
+    this.loading = true;
+    this.requestService.postRequest(request)
+        .pipe(first())
+        .subscribe(
+            data => {
+              this.loading = false;
+              this.router.navigate(['/private']);
+            },
+            error => {
+              this.loading = false;
+              this.error = 'Something went wrong...';
+            });
 
   }
 
