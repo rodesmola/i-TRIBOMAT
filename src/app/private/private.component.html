@@ -63,9 +63,15 @@
                                     <!-- <p class="card-text text"><small class="text-muted">Mariya Gabriel, the Commissioner for Digital Economy and Society 
                                     <a target="_blank" title="Go to source" class="text-muted" href="https://ec.europa.eu/digital-single-market/en/news/next-steps-digitising-european-industry-strategy-are-discussed-european-commission-hosted-high"> [Source] </a></small></p> -->
 
-                                    <div class=" card text-right" > 
+                                    <div class=" card text-right" *ngIf="isProfile"> 
                                         <a href="#" class="btnCustomBlue btn btn-primary" routerLink="/service">Create new service request</a>
                                     </div>
+                                    <div  *ngIf="!isProfile"> 
+                                        <div class="alert alert-warning mt-3 mb-1 col-md-12" style="text-align: center;">
+                                            You need to complete your profile first.
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>

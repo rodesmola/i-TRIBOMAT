@@ -8,6 +8,7 @@ export class PrivateComponent implements OnInit {
 
   currentUser: any;
   username: string;
+  isProfile: boolean;
 
   constructor(private authenticationService: AuthenticationService) {    
     this.currentUser = this.authenticationService.currentUserValue;    
@@ -15,6 +16,13 @@ export class PrivateComponent implements OnInit {
 
   ngOnInit() { 
     this.username = jwt_decode(this.currentUser.access_token).given_name; 
+
+    if (localStorage.getItem('isProfile') === 'false'){
+      this.isProfile = false;
+    }else{
+      this.isProfile = true;
+    }
+    
   }
 
 }

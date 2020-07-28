@@ -51,6 +51,7 @@ export class LoginComponent implements OnInit {
             .subscribe(
                 data => {
                     this.router.navigate([this.returnUrl]);
+                    localStorage.setItem('isProfile', 'false');
                 },
                 error => {
                     this.error = 'Invalid credentials!';

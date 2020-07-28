@@ -327,7 +327,7 @@ this.userSector = "";
                         localStorage.setItem('currentUserProfile', JSON.stringify(user));       
                         this.loading = false;
                         this.success = 'Profile updated!';
-                        //this.router.navigate(['/private']);
+                        localStorage.setItem('isProfile', 'true');
                     },
                     error => {
                         this.loading = false;
