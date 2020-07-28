@@ -1,21 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { UserProfile } from '@app/_models';
-import { BehaviorSubject } from 'rxjs';
+import { AuthenticationService } from '@app/_services';
+import * as jwt_decode from 'jwt-decode';
 @Component({
   templateUrl: './private.component.html',
   styleUrls: ['./private.component.css']})
 export class PrivateComponent implements OnInit {
-  public userProfile: BehaviorSubject<UserProfile>;
-  constructor() {
-    this.userProfile = new BehaviorSubject<UserProfile>(JSON.parse(localStorage.getItem('currentUserProfile')));
+
+  currentUser: any;
+  username: string;
+
+  constructor(private authenticationService: AuthenticationService) {    
+    this.currentUser = this.authenticationService.currentUserValue;    
    }
 
-  ngOnInit() {    
-  }
-
-  clearStorage(){
-    localStorage.removeItem('currentUserProfile');
-    console.log("as")
+  ngOnInit() { 
+    this.username = jwt_decode(this.currentUser.access_token).given_name; 
   }
 
 }
