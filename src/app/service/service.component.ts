@@ -18,6 +18,7 @@ export class ServiceComponent implements OnInit {
   submitted = false;
   // returnUrl: string;
   error = '';
+  success = '';
 
   mcChecklist:any;
   gearschecklist: any;
@@ -42,12 +43,12 @@ export class ServiceComponent implements OnInit {
     this.isMcOtherSelected = false;
     this.isGearOtherSelected = false;
     this.isLubricantOtherSelected = false;
-    this.mcValue =  'gears';
-    this.gearValue =  'mineraloil';
-    this.lubricantValue =  'twindisc';
+    this.mcValue = 'none';
+    this.gearValue = 'none';
+    this.lubricantValue = 'none';
 
     this.mcChecklist = [
-      {id:0,text:'Gears', value:'gears', img: './assets/gear.png',isSelected:true},
+      {id:0,text:'Gears', value:'gears', img: './assets/gear.png',isSelected:false},
       {id:1,text:'Ball bearing', value:'ballbearing', img: './assets/ball_bearing.png',isSelected:false},
       {id:2,text:'Roller bearing', value:'rollerbearing', img: './assets/roller_bearing.png',isSelected:false},
       {id:3,text:'Plain bearing', value:'plainbearing', img: './assets/plain_bearing.png',isSelected:false},
@@ -58,7 +59,7 @@ export class ServiceComponent implements OnInit {
       {id:8,text:'Other', value:'mcother', img: 'mcother',isSelected:false}
     ]
     this.lubricantchecklist = [
-      {id:0,text:'Mineral oil', value:'mineraloil',isSelected:true},
+      {id:0,text:'Mineral oil', value:'mineraloil',isSelected:false},
       {id:1,text:'Synthetic oil', value:'syntheticoil',isSelected:false},
       {id:2,text:'Bio lubricant', value:'biolubricant',isSelected:false},
       {id:3,text:'Solid lubricant', value:'solidlubricant',isSelected:false},
@@ -66,13 +67,13 @@ export class ServiceComponent implements OnInit {
       {id:5,text:'Other', value:'lubricantother',isSelected:false}
     ]     
     this.gearschecklist = [
-      {id:0,text:'Twin disc', value:'twindisc', img: './assets/twin_disc.png',isSelected:true},
+      {id:0,text:'Twin disc', value:'twindisc', img: './assets/twin_disc.png',isSelected:false},
       {id:1,text:'Spur gears (FZG)', value:'spurgears', img: './assets/spur_gear.png',isSelected:false},
       {id:2,text:'Helical gears', value:'helicalgears', img: './assets/helical_gear.png',isSelected:false},
       {id:3,text:'Other', value:'gearsother', img: 'gearsother',isSelected:false}
     ] 
     this.natureChecklist = [
-      {id:0,text:'Standarised tribological characterisation services (experimental)', value:'stc',isSelected:true},
+      {id:0,text:'Standarised tribological characterisation services (experimental)', value:'stc',isSelected:false},
       {id:1,text:'Data driven services', value:'dds',isSelected:false},
       {id:2,text:'Virtual workrooms and up-scaling services (modelling)', value:'vw',isSelected:false},
       {id:3,text:'Complementary services', value:'cs',isSelected:false}
@@ -82,7 +83,7 @@ export class ServiceComponent implements OnInit {
   ngOnInit(): void {
     this.serviceForm = this.formBuilder.group({      
       sr_description: ['', Validators.required],
-      gears: ['true'],
+      gears: ['false'],
       ballbearing: ['false'],
       rollerbearing: ['false'],
       plainbearing: ['false'],
@@ -92,12 +93,12 @@ export class ServiceComponent implements OnInit {
       surfacefloor: ['false'],
       mcother: ['false'],  
       mcotherinput: [''], 
-      twindisc: ['true'],       
+      twindisc: ['false'],       
       spurgears: ['false'],  
       helicalgears: ['false'],  
       gearsother: ['false'],        
       gearotherinput: [''], 
-      mineraloil: ['true'], 
+      mineraloil: ['false'], 
       syntheticoil: ['false'], 
       biolubricant: ['false'],
       solidlubricant: ['false'],
@@ -160,6 +161,9 @@ export class ServiceComponent implements OnInit {
       }
 
     }
+
+    this.error = '';
+    this.success = '';
   }
 
   get f() { return this.serviceForm.controls; }
@@ -192,18 +196,27 @@ export class ServiceComponent implements OnInit {
       "gears": this.gearValue      
     }
 
-    this.loading = true;
-    this.requestService.postRequest(request)
-        .pipe(first())
-        .subscribe(
-            data => {
-              this.loading = false;
-              this.router.navigate(['/private']);
-            },
-            error => {
-              this.loading = false;
-              this.error = 'Something went wrong...';
-            });
+    if(this.natureChecklist[0].isSelected && (this.lubricantValue === "none" || this.gearValue === "none")){
+      this.error = 'Please select some option before creating the request';
+    }else if(this.natureChecklist.every(check => check.isSelected == false)){
+      this.error = 'Please select some option before creating the request';
+    }else{
+      this.loading = true;
+      this.requestService.postRequest(request)
+          .pipe(first())
+          .subscribe(
+              data => {
+                this.loading = false;
+                this.success = 'Request submitted!';
+                //this.router.navigate(['/private']);
+              },
+              error => {
+                this.loading = false;
+                this.error = 'Something went wrong...';
+              });
+    }
+
+
 
   }
 
