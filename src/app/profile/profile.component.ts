@@ -51,9 +51,9 @@ export class ProfileComponent {
   
         this.userProfile = new BehaviorSubject<UserProfile>(JSON.parse(localStorage.getItem('currentUserProfile')));
         
-this.userLegalStatus = "";
-this.userMeet = "";
-this.userSector = "";
+        this.userLegalStatus = "";
+        this.userMeet = "";
+        this.userSector = "";
 
         this.cp_firstName = "";
         this.cp_lastName = "";
