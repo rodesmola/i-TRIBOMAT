@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
             email: ['', Validators.required],
             password: ['', Validators.required]
         });
-        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/profile';
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/private';
     }
 
     // convenience getter for easy access to form fields

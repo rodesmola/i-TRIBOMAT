@@ -16,16 +16,19 @@ export class ProfileComponent {
     submitted = false;
     returnUrl: string;
     error = '';
+    success = '';
 
-    meetChecklist:any;
     isMeetOtherSelected: boolean;
-    sectorChecklist:any;
     isSectorOtherSelected: boolean;
-    statusChecklist:any;
     isStatusOtherSelected: boolean;    
-    userLegalStatus: string;
-    userMeet: string;
-    userSector: string;
+
+    meetChecklist:any;    
+    sectorChecklist:any;    
+    statusChecklist:any;
+    
+    userLegalStatus: any;
+    userMeet: any;
+    userSector: any;
 
     cp_firstName: string;
     cp_lastName: string;
@@ -48,6 +51,9 @@ export class ProfileComponent {
   
         this.userProfile = new BehaviorSubject<UserProfile>(JSON.parse(localStorage.getItem('currentUserProfile')));
         
+this.userLegalStatus = "";
+this.userMeet = "";
+this.userSector = "";
 
         this.cp_firstName = "";
         this.cp_lastName = "";
@@ -55,7 +61,6 @@ export class ProfileComponent {
         this.cp_phone = "";
         this.cp_fax = "";
         this.cp_position = "";
-
 
         this.isSectorOtherSelected = false;
         this.sectorChecklist = [
@@ -91,6 +96,7 @@ export class ProfileComponent {
     ngOnInit() {
                      
         console.log(this.userProfile.value)
+        //
 
         if(this.userProfile.value.contactPersons){
             this.cp_firstName = this.userProfile.value.contactPersons[0].firstName;
@@ -104,41 +110,44 @@ export class ProfileComponent {
 
         for (var i = 0; i < this.sectorChecklist.length; i++) {
             if(this.sectorChecklist[i].value === this.userProfile.value.industrial_sector){
-                this.sectorChecklist[i].isSelected = true                        
-             } // else if (this.userSector == "")      {
-            //     this.sectorChecklist[0].isSelected = true 
-            //     this.userProfile.value.industrial_sector = 'transport'
-            // }
+                this.sectorChecklist[i].isSelected = true  
+                this.userSector = this.sectorChecklist[i].value                     
+             } 
         }
 
-        if(this.sectorChecklist.every(check => check.isSelected == false)){
-            this.sectorChecklist[8].isSelected = true
-            this.isSectorOtherSelected = true;
-            this.userSector = this.userProfile.value.industrial_sector
+        if(this.sectorChecklist.every(check => check.isSelected == false) 
+            && this.userProfile.value.industrial_sector != undefined){
+                this.sectorChecklist[8].isSelected = true
+                this.isSectorOtherSelected = true;
+                this.userSector = this.userProfile.value.industrial_sector
         }
 
         for (var i = 0; i < this.statusChecklist.length; i++) {
             if(this.statusChecklist[i].value === this.userProfile.value.legal_status){
-                this.statusChecklist[i].isSelected = true                        
+                this.statusChecklist[i].isSelected = true 
+                this.userLegalStatus = this.statusChecklist[i].value                    
             }       
         }
 
-        if(this.statusChecklist.every(check => check.isSelected == false)){
-            this.statusChecklist[5].isSelected = true
-            this.isStatusOtherSelected = true;
-            this.userLegalStatus = this.userProfile.value.legal_status
+        if(this.statusChecklist.every(check => check.isSelected == false)
+            && this.userProfile.value.legal_status != undefined){
+                this.statusChecklist[5].isSelected = true
+                this.isStatusOtherSelected = true;
+                this.userLegalStatus = this.userProfile.value.legal_status
         }
 
         for (var i = 0; i < this.meetChecklist.length; i++) {
             if(this.meetChecklist[i].value === this.userProfile.value.how_meet_us){
-                this.meetChecklist[i].isSelected = true                        
+                this.meetChecklist[i].isSelected = true    
+                this.userMeet = this.meetChecklist[i].value          
             }       
         }
 
-        if(this.meetChecklist.every(check => check.isSelected == false)){
-            this.meetChecklist[4].isSelected = true
-            this.isMeetOtherSelected = true;
-            this.userMeet = this.userProfile.value.how_meet_us
+        if(this.meetChecklist.every(check => check.isSelected == false) 
+            && this.userProfile.value.how_meet_us != undefined){
+                this.meetChecklist[4].isSelected = true
+                this.isMeetOtherSelected = true;
+                this.userMeet = this.userProfile.value.how_meet_us
         }
 
         this.profileForm = this.formBuilder.group({
@@ -219,6 +228,7 @@ export class ProfileComponent {
                 }else{
                     this.isMeetOtherSelected = false;
                     this.userMeet = currentlist[e].value
+ 
                 }
             }else if(list === 'sector'){
                 if (e === 8){
@@ -227,6 +237,7 @@ export class ProfileComponent {
                 }else{
                     this.isSectorOtherSelected = false;
                     this.userSector = currentlist[e].value
+    
                 }
             }else{
                 if (e === 5){
@@ -235,10 +246,13 @@ export class ProfileComponent {
                 }else{
                     this.isStatusOtherSelected = false;
                     this.userLegalStatus = currentlist[e].value
+        
                 }
             }              
         }
-                
+
+        this.error = '';
+        this.success = '';        
       }
 
     onSubmit() {
@@ -249,66 +263,77 @@ export class ProfileComponent {
             return;
         }  
 
-        if(this.statusChecklist[5].isSelected === true){
-            this.userLegalStatus = this.f.statusotherinput.value
-        }
-        if(this.meetChecklist[4].isSelected === true){
-            this.userMeet = this.f.meetotherinput.value
-        }
-        if(this.sectorChecklist[8].isSelected === true){
-            this.userSector = this.f.sectorotherinput.value
-        }
+        if(this.meetChecklist.every(check => check.isSelected == false) || 
+            this.sectorChecklist.every(check => check.isSelected == false) || 
+            this.statusChecklist.every(check => check.isSelected == false)){
 
-        var user = {   
-            "customer_id": "ATOS",
-            "legal_name": this.f.legal_name.value,
-            "short_name": this.f.short_name.value,
-            "department": this.f.department.value,
-            "street": this.f.street.value,
-            "town": this.f.town.value,
-            "postcode": this.f.postcode.value,
-            "country": this.f.country.value,
-            "webpage": this.f.webpage.value,
-            "location": this.f.location.value,
-            "invoice_street": this.f.invoice_street.value,
-            "invoice_town": this.f.invoice_town.value,
-            "invoice_postcode": this.f.invoice_postcode.value,
-            "invoice_country": this.f.invoice_country.value,
-            "invoice_web": this.f.invoice_web.value,
-            "vatNumber": this.f.vatNumber.value,
-            "email": this.f.email.value,
-            "phone": this.f.phone.value,
-            "fax": this.f.fax.value,
-            "invoice_terms": this.f.invoice_terms.value,
-            "legal_status": this.userLegalStatus,
-            "industrial_sector": this.userSector,
-            "how_meet_us": this.userMeet,
-            "contactPersons": [
-                {
-                    "firstName": this.f.firstName.value,
-                    "lastName": this.f.lastName.value,                    
-                    "email": this.f.email_cp.value,
-                    "phone": this.f.phone_cp.value,
-                    "fax": this.f.fax_cp.value,
-                    "position": this.f.position_cp.value,
-                }
-            ]
-        }
+                this.error = 'Please select some option before submitting';   
 
-        this.loading = true;
-        this.userService.saveProfile(user)
-            .pipe(first())
-            .subscribe(
-                data => {
-                    localStorage.setItem('currentUserProfile', JSON.stringify(user));       
-                    this.loading = false;
-                    this.router.navigate(['/private']);
-                },
-                error => {
-                    this.loading = false;
-                    this.error = 'Something went wrong...';
-                });
+        }else if (this.statusChecklist[5].isSelected === true && this.f.statusotherinput.value === ""){
+            this.error = 'Please select some option before submitting'; 
+        }else{
 
+            if(this.statusChecklist[5].isSelected === true){
+                this.userLegalStatus = this.f.statusotherinput.value
+            }
+            if(this.meetChecklist[4].isSelected === true){
+                this.userMeet = this.f.meetotherinput.value
+            }
+            if(this.sectorChecklist[8].isSelected === true){
+                this.userSector = this.f.sectorotherinput.value
+            }
+    
+            var user = {   
+                "customer_id": "ATOS",
+                "legal_name": this.f.legal_name.value,
+                "short_name": this.f.short_name.value,
+                "department": this.f.department.value,
+                "street": this.f.street.value,
+                "town": this.f.town.value,
+                "postcode": this.f.postcode.value,
+                "country": this.f.country.value,
+                "webpage": this.f.webpage.value,
+                "location": this.f.location.value,
+                "invoice_street": this.f.invoice_street.value,
+                "invoice_town": this.f.invoice_town.value,
+                "invoice_postcode": this.f.invoice_postcode.value,
+                "invoice_country": this.f.invoice_country.value,
+                "invoice_web": this.f.invoice_web.value,
+                "vatNumber": this.f.vatNumber.value,
+                "email": this.f.email.value,
+                "phone": this.f.phone.value,
+                "fax": this.f.fax.value,
+                "invoice_terms": this.f.invoice_terms.value,
+                "legal_status": this.userLegalStatus,
+                "industrial_sector": this.userSector,
+                "how_meet_us": this.userMeet,
+                "contactPersons": [
+                    {
+                        "firstName": this.f.firstName.value,
+                        "lastName": this.f.lastName.value,                    
+                        "email": this.f.email_cp.value,
+                        "phone": this.f.phone_cp.value,
+                        "fax": this.f.fax_cp.value,
+                        "position": this.f.position_cp.value,
+                    }
+                ]
+            }
+ 
+            this.loading = true;
+            this.userService.saveProfile(user)
+                .pipe(first())
+                .subscribe(
+                    data => {
+                        localStorage.setItem('currentUserProfile', JSON.stringify(user));       
+                        this.loading = false;
+                        this.success = 'Profile updated!';
+                        //this.router.navigate(['/private']);
+                    },
+                    error => {
+                        this.loading = false;
+                        this.error = 'Something went wrong...';
+                    });
+            }
     }
 
 }

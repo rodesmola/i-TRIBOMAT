@@ -253,13 +253,24 @@
                         <div class="dropdown-divider col-md-12"></div>
                     </div>
 
-                    <div class="form-group col-md-12 mt-2" style="text-align: right;">
-                        <div *ngIf="error" class="alert alert-danger mt-3 mb-3">{{error}}</div>
-                        <button [disabled]="loading" class="btnCustomBlue btn btn-primary text-right">
-                            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                            Save
-                        </button>
-                    </div>              
+                    <span class="col-md-12 row">
+                        <div *ngIf="error" class="alert alert-danger mt-3 mb-1 col-md-12">{{error}}</div>
+                        <div *ngIf="success" class="alert alert-success mt-3 mb-1 col-md-12">{{success}}</div>
+
+                        <div class="form-group col-md-6 mt-2">                            
+                            <button [disabled]="loading" class="btn btn-secondary text-right" routerLink="/private">
+                                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                                Back
+                            </button>
+                        </div>  
+
+                        <div class="form-group col-md-6 mt-2" style="text-align: right;">                           
+                            <button [disabled]="loading" class="btnCustomBlue btn btn-primary text-right">
+                                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                                Save
+                            </button>
+                        </div>                                      
+                    </span>            
                     
                 </form>
             </div>

@@ -26,6 +26,7 @@
                             <div *ngIf="f.password.errors.required">Password is required</div>
                         </div>
                     </div>
+                    <div *ngIf="error" class="alert alert-danger mt-3 mb-1">{{error}}</div>
                     New user?
                     <a routerLink="/register">click to register!</a>
                     <div class="form-group col-md-12" style="text-align: right;">
@@ -35,7 +36,7 @@
                         </button>
                     </div>
                     
-                    <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+                   
                 </form>
             </div>
         </div>
