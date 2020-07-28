@@ -26,6 +26,15 @@ export class ProfileComponent {
     userLegalStatus: string;
     userMeet: string;
     userSector: string;
+
+    cp_firstName: string;
+    cp_lastName: string;
+    cp_email: string;
+    cp_phone: string;
+    cp_fax: string;
+    cp_position: string;
+
+
       
     private userProfile: BehaviorSubject<UserProfile>;
     // public currentUserProfile: Observable<UserProfile>;
@@ -39,6 +48,15 @@ export class ProfileComponent {
   
         this.userProfile = new BehaviorSubject<UserProfile>(JSON.parse(localStorage.getItem('currentUserProfile')));
         
+
+        this.cp_firstName = "";
+        this.cp_lastName = "";
+        this.cp_email = "";
+        this.cp_phone = "";
+        this.cp_fax = "";
+        this.cp_position = "";
+
+
         this.isSectorOtherSelected = false;
         this.sectorChecklist = [
             {id:0,text:'Transport', value:'transport', isSelected:false},
@@ -72,10 +90,25 @@ export class ProfileComponent {
 
     ngOnInit() {
                      
+        console.log(this.userProfile.value)
+
+        if(this.userProfile.value.contactPersons){
+            this.cp_firstName = this.userProfile.value.contactPersons[0].firstName;
+            this.cp_lastName = this.userProfile.value.contactPersons[0].lastName;
+            this.cp_email = this.userProfile.value.contactPersons[0].email;
+            this.cp_phone = this.userProfile.value.contactPersons[0].phone;
+            this.cp_fax = this.userProfile.value.contactPersons[0].fax
+            this.cp_position = this.userProfile.value.contactPersons[0].position
+        }
+
+
         for (var i = 0; i < this.sectorChecklist.length; i++) {
             if(this.sectorChecklist[i].value === this.userProfile.value.industrial_sector){
                 this.sectorChecklist[i].isSelected = true                        
-            }       
+             } // else if (this.userSector == "")      {
+            //     this.sectorChecklist[0].isSelected = true 
+            //     this.userProfile.value.industrial_sector = 'transport'
+            // }
         }
 
         if(this.sectorChecklist.every(check => check.isSelected == false)){
@@ -120,12 +153,12 @@ export class ProfileComponent {
             email: [this.userProfile.value.email, Validators.required],
             phone: [this.userProfile.value.phone, Validators.required],
             fax: [this.userProfile.value.fax, Validators.required],
-            firstName: [this.userProfile.value.contactPersons[0].firstName, Validators.required],
-            lastName: [this.userProfile.value.contactPersons[0].lastName, Validators.required],
-            email_cp: [this.userProfile.value.contactPersons[0].email, Validators.required],
-            phone_cp: [this.userProfile.value.contactPersons[0].phone, Validators.required],
-            fax_cp: [this.userProfile.value.contactPersons[0].fax, Validators.required],
-            position_cp: [this.userProfile.value.contactPersons[0].position, Validators.required],
+            firstName: [this.cp_firstName, Validators.required],
+            lastName: [this.cp_lastName, Validators.required],
+            email_cp: [this.cp_email, Validators.required],
+            phone_cp: [this.cp_phone, Validators.required],
+            fax_cp: [this.cp_fax, Validators.required],
+            position_cp: [this.cp_position, Validators.required],
             location: [this.userProfile.value.location, Validators.required],
             invoice_street: [this.userProfile.value.invoice_street, Validators.required],
             invoice_town: [this.userProfile.value.invoice_town, Validators.required],

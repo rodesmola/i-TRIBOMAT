@@ -22,13 +22,13 @@ export class UserProfile {
     "department": string;
     "street": string;
     "town": string;
-    "postcode": number;
+    "postcode": string;
     "country": string;
     "webpage": string; 
     "location": string;
     "invoice_street": string;
     "invoice_town": string;
-    "invoice_postcode": number;
+    "invoice_postcode": string;
     "invoice_country": string;
     "invoice_web": string;
     "vatNumber": string;

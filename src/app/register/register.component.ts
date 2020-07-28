@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit {
       password: ['', Validators.required],
       password_conf: ['', Validators.required]
     });
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/profile';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/private';
   }
 
   get f() { return this.registerForm.controls; }

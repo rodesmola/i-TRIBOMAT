@@ -42,8 +42,11 @@ export class AuthenticationService {
 
     register(firstname: string, lastname: string, email: string, password: string, password_conf: string) {        
         return this.http.post<any>(`${environment.apiUrl}/register`, { firstname, lastname, email, password, password_conf })
-            .pipe(map(user => {
-                return user;
+            .pipe(map(userp => {
+                // store user details and jwt token in local storage to keep user logged in between page refreshes                
+                localStorage.setItem('currentUserProfile', JSON.stringify(userp));
+                this.currentUserSubject.next(userp);
+                return userp;
             }));
     }
 

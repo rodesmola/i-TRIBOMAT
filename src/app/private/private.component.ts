@@ -10,9 +10,12 @@ export class PrivateComponent implements OnInit {
     this.userProfile = new BehaviorSubject<UserProfile>(JSON.parse(localStorage.getItem('currentUserProfile')));
    }
 
-  ngOnInit() {
+  ngOnInit() {    
+  }
 
-    console.log(this.userProfile.value)
+  clearStorage(){
+    localStorage.removeItem('currentUserProfile');
+    console.log("as")
   }
 
 }

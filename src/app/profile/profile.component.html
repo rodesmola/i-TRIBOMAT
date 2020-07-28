@@ -86,7 +86,7 @@
 
                         <div class="form-group col-md-4">
                             <label for="postcode">Post code</label>
-                            <input type="number" formControlName="postcode" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.postcode.errors }" />
+                            <input type="text" formControlName="postcode" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.postcode.errors }" />
                             <div *ngIf="submitted && f.postcode.errors" class="invalid-feedback">
                                 <div *ngIf="f.postcode.errors.required">Post code is required</div>
                             </div>
@@ -146,7 +146,7 @@
                             <label for="email_cp">Email</label>
                             <input type="email" formControlName="email_cp" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email_cp.errors }" />
                             <div *ngIf="submitted && f.email_cp.errors" class="invalid-feedback">
-                                <div *ngIf="f.email_cp.errors.required">Email code is required</div>
+                                <div *ngIf="f.email_cp.errors.required">Email is required</div>
                             </div>
                         </div>
 
@@ -190,7 +190,7 @@
 
                         <div class="form-group col-md-4">
                             <label for="invoice_postcode">Invoice Post code</label>
-                            <input type="number" formControlName="invoice_postcode" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.invoice_postcode.errors }" />
+                            <input type="text" formControlName="invoice_postcode" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.invoice_postcode.errors }" />
                             <div *ngIf="submitted && f.invoice_postcode.errors" class="invalid-feedback">
                                 <div *ngIf="f.invoice_postcode.errors.required">Invoice Post code is required</div>
                             </div>
