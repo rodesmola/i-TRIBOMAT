@@ -147,3 +147,12 @@
 .card_area {
 	padding: 0rem 3.2rem 0rem 3.2rem;
 }
+
+
+
+
+  .img-holder img {
+	height: 200px;
+	object-fit: none;
+	object-position: 50% 50%;
+  }
