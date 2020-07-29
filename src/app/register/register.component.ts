@@ -45,33 +45,40 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.invalid) {
         return;
     }
-
-    this.loading = true;
     
-    this.authenticationService.register(
-      this.f.firstname.value, 
-      this.f.lastname.value, 
-      this.f.email.value, 
-      this.f.password.value, 
-      this.f.password_conf.value)
-        .pipe(first())
-        .subscribe(
-            data => {
-                this.authenticationService.login(this.f.email.value, this.f.password.value)
-                .pipe(first())
-                .subscribe(
-                    data => {
-                        this.router.navigate([this.returnUrl]);                        
-                    },
-                    error => {
-                        this.error = error;
-                        this.loading = false;
-                   });
-            },
-            error => {
-                this.error = error;
-                this.loading = false;
-            });
-}
+    if(this.f.password.value === this.f.password_conf.value){
+      this.error = '';
+      this.loading = true;    
+      this.authenticationService.register(
+        this.f.firstname.value, 
+        this.f.lastname.value, 
+        this.f.email.value, 
+        this.f.password.value, 
+        this.f.password_conf.value)
+          .pipe(first())
+          .subscribe(
+              data => {
+                  this.authenticationService.login(this.f.email.value, this.f.password.value)
+                  .pipe(first())
+                  .subscribe(
+                      data => {                          
+                          this.router.navigate([this.returnUrl]);                        
+                      },
+                      error => {
+                          this.error = error;
+                          this.loading = false;
+                    });
+              },
+              error => {
+                  this.error = error;
+                  this.loading = false;
+              });
+      }else{
+        this.error = 'Passwords does not match!';
+      }
+    
+
+
+  }
 
 }

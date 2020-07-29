@@ -42,7 +42,8 @@
                         <div *ngIf="submitted && f.password_conf.errors" class="invalid-feedback">
                             <div *ngIf="f.password_conf.errors.required">Password confirmation is required</div>
                         </div>
-                    </div>                
+                    </div>            
+                    <div *ngIf="error" class="alert alert-danger mt-3 mb-1">{{error}}</div>    
                     Already registered?
                     <a routerLink="/login">click to sign in!</a>
                     <div class="form-group col-md-12" style="text-align: right;">
@@ -51,7 +52,7 @@
                             Register
                         </button>
                     </div>
-                    <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+                    
                 </form>
             </div>
         </div>
