@@ -7,7 +7,8 @@ import * as jwt_decode from 'jwt-decode';
 export class PrivateComponent implements OnInit {
 
   currentUser: any;
-  username: string;
+  first_name: string;
+  last_name: string;
   isProfile: boolean;
 
   constructor(private authenticationService: AuthenticationService) {    
@@ -15,7 +16,8 @@ export class PrivateComponent implements OnInit {
    }
 
   ngOnInit() { 
-    this.username = jwt_decode(this.currentUser.access_token).given_name; 
+    this.first_name = jwt_decode(this.currentUser.access_token).given_name; 
+    this.last_name = jwt_decode(this.currentUser.access_token).family_name; 
 
     if (localStorage.getItem('isProfile') === 'false'){
       this.isProfile = false;
